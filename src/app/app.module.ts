@@ -27,6 +27,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 
 import { AppRoutingModule } from './router/app-routing.module';
+import { environment } from 'src/environments/environment';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -35,7 +36,7 @@ const googleLoginOptions: LoginOpt = {
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("279172918526-epi7nsvt5l8bn9su6b3pnss5q32re2ks.apps.googleusercontent.com", googleLoginOptions)
+    provider: new GoogleLoginProvider(environment.googleAPIClientId, googleLoginOptions)
   }
 ]);
 
