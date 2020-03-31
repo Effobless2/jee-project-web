@@ -20,7 +20,7 @@ import { AppComponent } from './layouts/root/app.component';
 //import { MatIconModule } from '@angular/material/icon'
 
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 import { HeaderComponent } from './layouts/header/header.component';
 import { BodyComponent } from './layouts/body/body.component';
 import { HomeComponent } from './components/home/home.component';
@@ -30,7 +30,8 @@ import { AppRoutingModule } from './router/app-routing.module';
 import { environment } from 'src/environments/environment';
 
 import { StoreModule } from '@ngrx/store'
-import { reducer } from './store/reducers/counter.reducer'
+import { userReducer } from './store/reducers/user.reducer';
+import { AuthenticationService } from './services/authentication.service';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -61,7 +62,7 @@ export function provideConfig() {
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({
-      counter: reducer
+      user: userReducer
     }),
     AppRoutingModule
   ],
@@ -69,7 +70,8 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

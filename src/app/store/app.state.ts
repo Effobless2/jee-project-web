@@ -1,5 +1,5 @@
-import { Counter } from '../models/counter.model'
+import { SocialUser } from 'angularx-social-login';
 
 export interface AppState {
-    counter: Counter;
+    user: SocialUser;
 }
