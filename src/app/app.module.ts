@@ -29,6 +29,9 @@ import { AboutComponent } from './components/about/about.component';
 import { AppRoutingModule } from './router/app-routing.module';
 import { environment } from 'src/environments/environment';
 
+import { StoreModule } from '@ngrx/store'
+import { reducer } from './store/reducers/counter.reducer'
+
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
 };
@@ -57,7 +60,9 @@ export function provideConfig() {
     SocialLoginModule,
     BrowserModule,
     HttpClientModule,
-
+    StoreModule.forRoot({
+      counter: reducer
+    }),
     AppRoutingModule
   ],
   providers: [
