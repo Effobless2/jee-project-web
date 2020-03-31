@@ -6,5 +6,5 @@ import { Component, Input } from "@angular/core";
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent{
-@Input('title') title: String = "Beerer";
+    title: String = "Beerer";
 }
