@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "jee-project-web"
+    }
+  },
+  "defaultProject": "jee-project-web",
+  "cli": {
+    "analytics": "05c0965a-8c9f-47b8-9cb6-5111716c108b"
+  }
 }

@@ -1,0 +1,26 @@
+.example-card {
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1%;
+}
+
+.example-header-image {
+  background-size: cover;
+  height: 80px;
+  width: 80px;
+}
+
+.header-text {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+mat-card-content {
+  margin: 5px;
+}
+
+mat-toolbar {
+  margin-bottom: 5px;
+}
