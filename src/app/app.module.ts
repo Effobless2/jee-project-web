@@ -32,6 +32,13 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store'
 import { userReducer } from './store/reducers/user.reducer';
 import { AuthenticationService } from './services/authentication.service';
+import { BeersListComponent } from './components/beers/beers-list/beers-list.component';
+import { BeersCardComponent } from "./components/beers/beers-card/beers-card.component";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
+import { ShopsCardComponent } from "./components/shops/shops-card/shops-card.component";
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -55,7 +62,11 @@ export function provideConfig() {
     HeaderComponent,
     BodyComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    BeersListComponent,
+    BeersCardComponent,
+    ShopsListComponent,
+    ShopsCardComponent
   ],
   imports: [
     SocialLoginModule,
@@ -64,7 +75,10 @@ export function provideConfig() {
     StoreModule.forRoot({
       user: userReducer
     }),
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
   ],
   providers: [
     {
