@@ -20,6 +20,7 @@ export class AboutComponent {
         private httpService: HttpService
     ){
         store.select('user').subscribe(user => this.user = user);
+        store.select('token').subscribe(token => this.title = token);
     }
 
     get connectBtnText() : String {

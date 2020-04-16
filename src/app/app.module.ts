@@ -31,6 +31,7 @@ import { environment } from 'src/environments/environment';
 
 import { StoreModule } from '@ngrx/store'
 import { userReducer } from './store/reducers/user.reducer';
+import { tokenReducer } from './store/reducers/token.reducer';
 import { AuthenticationService } from './services/authentication.service';
 import { BeersListComponent } from './components/beers/beers-list/beers-list.component';
 import { BeersCardComponent } from "./components/beers/beers-card/beers-card.component";
@@ -74,7 +75,8 @@ export function provideConfig() {
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot({
-      user: userReducer
+      user: userReducer,
+      token: tokenReducer
     }),
     AppRoutingModule,
     MatCardModule,
