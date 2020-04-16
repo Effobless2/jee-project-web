@@ -1,5 +1,6 @@
-import { SocialUser } from 'angularx-social-login';
+import { User } from '../models/User';
 
 export interface AppState {
-    user: SocialUser;
+    user: User;
+    token: string;
 }

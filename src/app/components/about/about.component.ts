@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/models/User';
 
 @Component({
     selector: 'page-about',
@@ -10,16 +10,20 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-    title = 'Beerer';
-    user: SocialUser = null;
-    
-      constructor(private authService: AuthenticationService, private store: Store<AppState>){
-          store.select('user').subscribe(user => this.user = user);
-      }
-  
-      get connectBtnText() : String {
-          return this.loggedIn ? "Sign Out" : "Sign In";
-      }
+    user: User = null;
+    token: string = null;
+
+    constructor(
+        private authService: AuthenticationService,
+        private store: Store<AppState>
+    ){
+        this.store.select('user').subscribe(user => this.user = user);
+        this.store.select('token').subscribe(token => this.token = token);
+    }
+
+    get connectBtnText() : String {
+        return this.loggedIn ? "Sign Out" : "Sign In";
+    }
 
 
     //TODO : Move all logic and objects into a store to implement
@@ -27,7 +31,7 @@ export class AboutComponent {
         return this.user != null;
     }
 
-    connectionMethod(): void {
+    async connectionMethod(): Promise<void> {
         this.loggedIn ? this.signOut() : this.signInWithGoogle();
     }
   
