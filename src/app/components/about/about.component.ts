@@ -3,6 +3,7 @@ import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-lo
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { HttpService } from 'src/app/services/api.service';
 
 @Component({
     selector: 'page-about',
@@ -12,14 +13,18 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class AboutComponent {
     title = 'Beerer';
     user: SocialUser = null;
-    
-      constructor(private authService: AuthenticationService, private store: Store<AppState>){
-          store.select('user').subscribe(user => this.user = user);
-      }
-  
-      get connectBtnText() : String {
-          return this.loggedIn ? "Sign Out" : "Sign In";
-      }
+
+    constructor(
+        private authService: AuthenticationService,
+        private store: Store<AppState>,
+        private httpService: HttpService
+    ){
+        store.select('user').subscribe(user => this.user = user);
+    }
+
+    get connectBtnText() : String {
+        return this.loggedIn ? "Sign Out" : "Sign In";
+    }
 
 
     //TODO : Move all logic and objects into a store to implement
@@ -27,7 +32,8 @@ export class AboutComponent {
         return this.user != null;
     }
 
-    connectionMethod(): void {
+    async connectionMethod(): Promise<void> {
+        await this.httpService.sendReq();
         this.loggedIn ? this.signOut() : this.signInWithGoogle();
     }
   
