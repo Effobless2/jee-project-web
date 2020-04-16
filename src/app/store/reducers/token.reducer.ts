@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store'
 import * as TokenActions from '../actions/token.actions';
 
 const initialToken: string = null;

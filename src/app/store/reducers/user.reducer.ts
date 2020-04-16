@@ -1,10 +1,9 @@
-import { Action } from '@ngrx/store'
 import * as UserActions from '../actions/user.actions';
-import { SocialUser, GoogleLoginProvider } from 'angularx-social-login'
+import { User } from 'src/app/models/User';
 
-const initialUser: SocialUser = null;
+const initialUser: User = null;
 
-export function userReducer(state: SocialUser = initialUser, action: UserActions.Actions) : SocialUser {
+export function userReducer(state: User = initialUser, action: UserActions.Actions) : User {
 
     let result = state;
     switch(action.type){

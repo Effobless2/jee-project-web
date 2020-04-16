@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpService } from 'src/app/services/api.service';
+import { User } from 'src/app/models/User';
 
 @Component({
     selector: 'page-about',
@@ -11,8 +11,8 @@ import { HttpService } from 'src/app/services/api.service';
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-    title = 'Beerer';
-    user: SocialUser = null;
+    user: User = null;
+    token: string = null;
 
     constructor(
         private authService: AuthenticationService,
@@ -20,7 +20,7 @@ export class AboutComponent {
         private httpService: HttpService
     ){
         store.select('user').subscribe(user => this.user = user);
-        store.select('token').subscribe(token => this.title = token);
+        store.select('token').subscribe(token => this.token = token);
     }
 
     get connectBtnText() : String {
