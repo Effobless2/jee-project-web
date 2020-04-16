@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { HttpService } from 'src/app/services/api.service';
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -16,11 +15,10 @@ export class AboutComponent {
 
     constructor(
         private authService: AuthenticationService,
-        private store: Store<AppState>,
-        private httpService: HttpService
+        private store: Store<AppState>
     ){
-        store.select('user').subscribe(user => this.user = user);
-        store.select('token').subscribe(token => this.token = token);
+        this.store.select('user').subscribe(user => this.user = user);
+        this.store.select('token').subscribe(token => this.token = token);
     }
 
     get connectBtnText() : String {
@@ -34,7 +32,6 @@ export class AboutComponent {
     }
 
     async connectionMethod(): Promise<void> {
-        await this.httpService.sendReq();
         this.loggedIn ? this.signOut() : this.signInWithGoogle();
     }
   

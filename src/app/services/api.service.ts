@@ -6,6 +6,7 @@ import { NewToken } from '../store/actions/token.actions';
 import * as jwt_decode from 'jwt-decode';
 import { User } from '../models/User';
 import { ConnectUser } from '../store/actions/user.actions';
+import { environment } from 'src/environments/environment';
 
 interface tokenResult{
   token: string;
@@ -15,17 +16,9 @@ export class HttpService {
   constructor(private http: HttpClient,  private store: Store<AppState>) {
    }
 
-   async sendReq(){
-        this.http.get(
-            "http://localhost:8080/beers"
-        ).subscribe(data => {
-          console.log(data)
-        });
-   }
-
    async apiAuth(googleToken: string){
      this.http.post(
-      "http://localhost:8080/users/auth",
+      `${environment.beererApiUrl}users/auth`,
       googleToken
      ).subscribe((data: tokenResult) => {
         let decoded: any = jwt_decode(data.token);
@@ -37,6 +30,6 @@ export class HttpService {
         };
         this.store.dispatch(new ConnectUser(newUser));
         this.store.dispatch(new NewToken(data.token));
-     })
+     });
    }
 }
