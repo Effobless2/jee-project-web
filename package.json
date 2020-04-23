@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.0",
     "@babel/compat-data": "^7.8.0",
     "@ngrx/store": "^9.0.0",
+    "angular-bootstrap-md": "^9.1.0",
     "angularx-social-login": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "rxjs": "~6.5.4",

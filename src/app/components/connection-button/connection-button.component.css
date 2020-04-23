@@ -1,0 +1,14 @@
+.macaroon {
+    border-radius: 50%;
+    max-width: 30pt;
+    max-height: 30pt;
+}
+.example-header-image {
+    background-size: cover;
+    height: 80px;
+    width: 80px;
+}
+
+.modal-content{
+    background-color: white;
+}
