@@ -47,12 +47,8 @@ export class BeersListComponent implements OnInit {
   constructor(private beerService: BeerService) {
     console.log("print");
     this.beerService.getAll(
-      (beers: Beer[]) => {
-        this.beers = beers;
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-      }
+      (beers: Beer[]) => this.beers = beers,
+      (error: HttpErrorResponse) => console.error(error)
     );
    }
 
