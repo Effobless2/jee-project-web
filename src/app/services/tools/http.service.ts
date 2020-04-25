@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.state';
 import { Observable } from 'rxjs';
 
 interface tokenResult{
@@ -9,18 +7,22 @@ interface tokenResult{
 }
 @Injectable()
 export class HttpService {
-    constructor(private http: HttpClient,  private store: Store<AppState>) {
+    constructor(private http: HttpClient) {
+	}
+
+	private _headerConstructor(token?: string): HttpHeaders {
+		return token ? new HttpHeaders({
+			'Content-Type':  'application/json',
+			  'Authorization': `Bearer ${token}`
+		  }) : null;
 	}
 	
     get(url: string, token?: string): Observable<any>{
-      return this.http.get(
-          url,
-          {
-              headers: token ? new HttpHeaders({
-				'Content-Type':  'application/json',
-                  'Authorization': `Bearer ${token}`
-              }) : null
-          }
+        return this.http.get(
+            url,
+            {
+                headers: this._headerConstructor(token)
+            }
       );
     }
 
@@ -29,10 +31,7 @@ export class HttpService {
 			url,
 			body,
 			{
-				headers: token ? new HttpHeaders({
-					'Content-Type':  'application/json',
-					  'Authorization': `Bearer ${token}`
-				  }) : null
+				headers: this._headerConstructor(token)
 			}
 		);
 	}
@@ -42,10 +41,7 @@ export class HttpService {
 			url,
 			body,
 			{
-				headers: token ? new HttpHeaders({
-					'Content-Type':  'application/json',
-					  'Authorization': `Bearer ${token}`
-				  }) : null
+				headers: this._headerConstructor(token)
 			}
 		);
 	}
@@ -55,10 +51,7 @@ export class HttpService {
 			url,
 			body,
 			{
-				headers: token ? new HttpHeaders({
-					'Content-Type':  'application/json',
-					  'Authorization': `Bearer ${token}`
-				  }) : null
+				headers: this._headerConstructor(token)
 			}
 		);
 	}
@@ -67,9 +60,7 @@ export class HttpService {
 		return this.http.delete(
 			url,
 			{
-				headers: token ? new HttpHeaders({
-					  'Authorization': `Bearer ${token}`
-				  }) : null
+				headers: this._headerConstructor(token)
 			}
 		);
 	}
