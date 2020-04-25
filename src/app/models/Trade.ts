@@ -1,4 +1,4 @@
-export interface Shop{
+export interface Trade{
     id?: number;
     name: string;
     type: string;

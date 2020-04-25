@@ -27,7 +27,7 @@ export class BeerService{
         });
     }
 
-    get(id: number, subscriber: (beers: Beer) => void, error?: (error: HttpErrorResponse) => void){
+    get(id: number, subscriber: (beer: Beer) => void, error?: (error: HttpErrorResponse) => void){
         return this.httpService.get(`${this.controllerUrl}/${id}`)
         .subscribe({
             next: subscriber,
@@ -35,7 +35,7 @@ export class BeerService{
         });
     }
 
-    post(beer: Beer, subscriber: (beerId: number) => void, error?: (error: HttpErrorResponse) => void){
+    post(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void){
         return this.httpService.post(this.controllerUrl, beer, this.token)
         .subscribe({
             next: subscriber,
@@ -43,7 +43,7 @@ export class BeerService{
         });
     }
 
-    put(beer: Beer, subscriber: (beerId: number) => void, error?: (error: HttpErrorResponse) => void){
+    put(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void){
         return this.httpService.put(this.controllerUrl, beer, this.token)
         .subscribe({
             next: subscriber,

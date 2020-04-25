@@ -44,7 +44,8 @@ import { ShopsListComponent } from './components/shops/shops-list/shops-list.com
 import { ShopsCardComponent } from "./components/shops/shops-card/shops-card.component";
 import { HttpService } from './services/tools/http.service'
 import { UserService } from './services/api/user.service';
-import { BeerService } from './services/api/beers.service';
+import { BeerService } from './services/api/beer.service';
+import { TradeService } from './services/api/trade.service';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -101,6 +102,7 @@ export function provideConfig() {
     AuthenticationService,
     UserService,
     BeerService,
+    TradeService,
     HttpService
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Beer } from 'src/app/models/Beer';
-import { BeerService } from 'src/app/services/api/beers.service';
+import { BeerService } from 'src/app/services/api/beer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
