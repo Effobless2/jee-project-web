@@ -10,73 +10,60 @@ interface tokenResult{
 @Injectable()
 export class HttpService {
     constructor(private http: HttpClient,  private store: Store<AppState>) {
-    }
+	}
+	
     get(url: string, token?: string): Observable<any>{
       return this.http.get(
           url,
           {
               headers: token ? new HttpHeaders({
-                  'Authorization': token
+				'Content-Type':  'application/json',
+                  'Authorization': `Bearer ${token}`
               }) : null
           }
       );
     }
 
 	post(url: string, body: any, token?: string) : Observable<any>{
-		let headers: HttpHeaders = new HttpHeaders({
-			'Content-Type':  'application/json'
-		});
-		if(token)
-			headers.append('Authorization', token);
-		
 		return this.http.post(
 			url,
 			body,
 			{
-				headers: headers
+				headers: token ? new HttpHeaders({
+					'Content-Type':  'application/json',
+					  'Authorization': `Bearer ${token}`
+				  }) : null
 			}
 		);
 	}
 
 	put(url: string, body: any, token?: string){
-		let headers: HttpHeaders = new HttpHeaders({
-			'Content-Type':  'application/json'
-		});
-		if(token)
-			headers.append('Authorization', token);
-		
 		return this.http.put(
 			url,
 			body,
 			{
-				headers: headers
+				headers: token ? new HttpHeaders({
+					'Content-Type':  'application/json',
+					  'Authorization': `Bearer ${token}`
+				  }) : null
 			}
 		);
 	}
 
 	patch(url: string, body: any, token?: string){
-		let headers: HttpHeaders = new HttpHeaders({
-			'Content-Type':  'application/json'
-		});
-		if(token)
-			headers.append('Authorization', token);
-		
 		return this.http.patch(
 			url,
 			body,
 			{
-				headers: headers
+				headers: token ? new HttpHeaders({
+					'Content-Type':  'application/json',
+					  'Authorization': `Bearer ${token}`
+				  }) : null
 			}
 		);
 	}
 
-	delete(url: string, token?: string){
-		let headers: HttpHeaders = new HttpHeaders({
-			'Content-Type':  'application/json'
-		});
-		if(token)
-			headers.append('Authorization', token);
-		
+	delete(url: string, token?: string){		
 		return this.http.delete(
 			url,
 			{

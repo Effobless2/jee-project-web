@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { Injectable } from '@angular/core';
 import { DisableToken, NewToken } from '../store/actions/token.actions';
-import { UserService } from './api/users.service';
+import { UserService } from './api/user.service';
 import * as jwt_decode from 'jwt-decode';
 import { User } from '../models/User';
 

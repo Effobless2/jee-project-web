@@ -43,7 +43,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
 import { ShopsCardComponent } from "./components/shops/shops-card/shops-card.component";
 import { HttpService } from './services/tools/http.service'
-import { UserService } from './services/api/users.service';
+import { UserService } from './services/api/user.service';
+import { BeerService } from './services/api/beers.service';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -99,6 +100,7 @@ export function provideConfig() {
     },
     AuthenticationService,
     UserService,
+    BeerService,
     HttpService
   ],
   bootstrap: [AppComponent]
