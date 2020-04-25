@@ -1,22 +1,34 @@
 import { AuthService, SocialUser, GoogleLoginProvider } from "angularx-social-login";
-import { DisconnectUser } from '../store/actions/user.actions';
+import { DisconnectUser, ConnectUser } from '../store/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
 import { Injectable } from '@angular/core';
-import { HttpService } from './api.service';
-import { DisableToken } from '../store/actions/token.actions';
+import { DisableToken, NewToken } from '../store/actions/token.actions';
+import { UserService } from './api/users.service';
+import * as jwt_decode from 'jwt-decode';
+import { User } from '../models/User';
 
 @Injectable()
 export class AuthenticationService {
     constructor(
         private authService: AuthService,
         private store: Store<AppState>,
-        private httpService: HttpService
+        private userService: UserService
     ){}
 
     async signIn(){
         let newUser: SocialUser = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-        this.httpService.apiAuth(newUser.idToken);
+        this.userService.auth(newUser.idToken, (data: {token:string}) => {
+            let decoded: any = jwt_decode(data.token);
+            let newUser: User = {
+                id: decoded.id,
+                name: decoded.name,
+                email: decoded.email,
+                avatarUrl: decoded.avatarUrl
+            };
+            this.store.dispatch(new ConnectUser(newUser));
+            this.store.dispatch(new NewToken(data.token));
+        });
     }
 
     async signOut(){
