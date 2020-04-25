@@ -2,7 +2,7 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpService } from '../tools/http.service';
 import { Subscription } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Beer } from 'src/app/models/Beer';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
@@ -37,6 +37,22 @@ export class BeerService{
 
     post(beer: Beer, subscriber: (beerId: number) => void, error?: (error: HttpErrorResponse) => void){
         return this.httpService.post(this.controllerUrl, beer, this.token)
+        .subscribe({
+            next: subscriber,
+            error: error
+        });
+    }
+
+    put(beer: Beer, subscriber: (beerId: number) => void, error?: (error: HttpErrorResponse) => void){
+        return this.httpService.put(this.controllerUrl, beer, this.token)
+        .subscribe({
+            next: subscriber,
+            error: error
+        });
+    }
+
+    delete(id: number, subscriber: (result: null) => void, error?: (error: HttpErrorResponse) => void){
+        return this.httpService.delete(`${this.controllerUrl}/${id}`, this.token)
         .subscribe({
             next: subscriber,
             error: error

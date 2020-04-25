@@ -68,8 +68,8 @@ export class HttpService {
 			url,
 			{
 				headers: token ? new HttpHeaders({
-					'Authorization': token
-				}) : null
+					  'Authorization': `Bearer ${token}`
+				  }) : null
 			}
 		);
 	}
