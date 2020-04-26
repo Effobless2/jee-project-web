@@ -39,6 +39,7 @@ import { BeersListComponent } from './components/beers/beers-list/beers-list.com
 import { BeersCardComponent } from "./components/beers/beers-card/beers-card.component";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
 import { ShopsCardComponent } from "./components/shops/shops-card/shops-card.component";
@@ -47,6 +48,7 @@ import { UserService } from './services/api/user.service';
 import { BeerService } from './services/api/beer.service';
 import { TradeService } from './services/api/trade.service';
 import { ShopFormularComponent } from './components/forms/shop-formular/shop-formular.component';
+import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -76,7 +78,8 @@ export function provideConfig() {
     ShopsListComponent,
     ShopsCardComponent,
     ConnectionBtnComponent,
-    ShopFormularComponent
+    ShopFormularComponent,
+    BeerFormularComponent
   ],
   imports: [
     SocialLoginModule,
@@ -90,6 +93,7 @@ export function provideConfig() {
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
+    MatSelectModule,
     MatMenuModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
