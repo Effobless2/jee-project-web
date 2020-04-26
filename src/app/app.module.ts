@@ -5,11 +5,11 @@ import { AppComponent } from './layouts/root/app.component';
 import { MatMenuModule } from '@angular/material/menu'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule, WavesModule  } from 'angular-bootstrap-md'
-//import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 //import { MatRadioModule } from '@angular/material/radio'
 //import { MatButtonModule } from '@angular/material/button'
 //import { MatCheckboxModule } from '@angular/material/checkbox'
-//import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input'
 //import { MatSelectModule } from '@angular/material/select'
 //import { MatDatepickerModule } from '@angular/material/datepicker'
 //import { MatNativeDateModule } from '@angular/material/core'
@@ -46,6 +46,7 @@ import { HttpService } from './services/tools/http.service'
 import { UserService } from './services/api/user.service';
 import { BeerService } from './services/api/beer.service';
 import { TradeService } from './services/api/trade.service';
+import { ShopFormularComponent } from './components/forms/shop-formular/shop-formular.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -74,7 +75,8 @@ export function provideConfig() {
     BeersCardComponent,
     ShopsListComponent,
     ShopsCardComponent,
-    ConnectionBtnComponent
+    ConnectionBtnComponent,
+    ShopFormularComponent
   ],
   imports: [
     SocialLoginModule,
@@ -92,7 +94,9 @@ export function provideConfig() {
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     WavesModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [
     {

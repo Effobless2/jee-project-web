@@ -45,7 +45,6 @@ export class BeersListComponent implements OnInit {
   beers: Beer[];
 
   constructor(private beerService: BeerService) {
-    console.log("print");
     this.beerService.getAll(
       (beers: Beer[]) => this.beers = beers,
       (error: HttpErrorResponse) => console.error(error)
@@ -53,7 +52,5 @@ export class BeersListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
   }
-
 }

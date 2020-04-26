@@ -1,0 +1,29 @@
+<h1>Hello</h1>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+    <div class = "row">
+        <mat-form-field>
+            <mat-label for="name">Name</mat-label>
+            <input matInput id="name" type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="description">Description</mat-label>
+            <textarea id="description" matInput formControlName="description"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field>
+            <mat-label for="type">Type</mat-label>
+            <input matInput type="text" id="type" formControlName="type">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="address">Adresse</mat-label>
+            <input matInput type="text" id="address" formControlName="address">
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Purchase</button>
+</form>
