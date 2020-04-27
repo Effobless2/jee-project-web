@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule, WavesModule  } from 'angular-bootstrap-md'
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 //import { MatRadioModule } from '@angular/material/radio'
 //import { MatButtonModule } from '@angular/material/button'
 //import { MatCheckboxModule } from '@angular/material/checkbox'
@@ -47,6 +48,7 @@ import { UserService } from './services/api/user.service';
 import { BeerService } from './services/api/beer.service';
 import { TradeService } from './services/api/trade.service';
 import { ShopFormularComponent } from './components/forms/shop-formular/shop-formular.component';
+import { MapComponent } from './components/map/map.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -76,7 +78,8 @@ export function provideConfig() {
     ShopsListComponent,
     ShopsCardComponent,
     ConnectionBtnComponent,
-    ShopFormularComponent
+    ShopFormularComponent,
+    MapComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -96,7 +99,10 @@ export function provideConfig() {
     WavesModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAS_MD8CAjuOb71JEkFNKDzzkGC4pPXZS4'
+    }),
   ],
   providers: [
     {

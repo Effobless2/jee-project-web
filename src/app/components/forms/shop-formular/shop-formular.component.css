@@ -1,3 +1,17 @@
 mat-form-field{
     padding: 15pt;
 }
+
+form{
+    display: flex;
+}
+
+button{
+    margin: 15pt;
+}
+
+map{
+    height: 500px;
+    width: 500px;
+    margin: 0;
+}
