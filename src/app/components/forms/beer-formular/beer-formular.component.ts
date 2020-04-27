@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
 
 interface BeerFormularFields{
   name: string;
-  pic: string;
+  pic: File;
   type: string;
   alcoholLevel: number;
   desc: string;
@@ -20,12 +22,13 @@ export class BeerFormularComponent implements OnInit {
   types = ["Blonde", "Brune", "Rousse", "Chatain", "Chauve"];
   imageSrc: any = '';
   selectFile = null;
+  selectFileName = '';
 
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder, private httpclient: HttpClient){
       this.formGroup = this.formBuilder.group({
           name: '',
-          pic: '',
+          pic: null,
           type: '',
           alcoholLevel: null,
           desc: '',
@@ -39,13 +42,15 @@ export class BeerFormularComponent implements OnInit {
   }
 
   onSubmit(values: BeerFormularFields){
+    values.pic = this.selectFile;
     console.log(values);
   }
 
-  onFileSelect(event) {
-      this.selectFile = event.target.files[0];
-      console.log('le type du fichier est : ', event.target.files[0].type);
-  }
+  selectedFile: File
 
+  onFileChanged(event) {
+    this.selectFile = event.target.files[0];
+    this.selectFileName = event.target.files[0].name;
+  }
 
 }

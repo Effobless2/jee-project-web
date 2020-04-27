@@ -51,6 +51,7 @@ import { TradeService } from './services/api/trade.service';
 import { ShopFormularComponent } from './components/forms/shop-formular/shop-formular.component';
 import { MapComponent } from './components/map/map.component';
 import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -93,6 +94,7 @@ export function provideConfig() {
       token: tokenReducer
     }),
     AppRoutingModule,
+    MatProgressBarModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
