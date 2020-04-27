@@ -105,7 +105,7 @@ export function provideConfig() {
     ReactiveFormsModule,
     MatInputModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAS_MD8CAjuOb71JEkFNKDzzkGC4pPXZS4'
+      apiKey: environment.googleCloudAPIClientId
     }),
   ],
   providers: [
