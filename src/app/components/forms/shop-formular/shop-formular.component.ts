@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MapComponent, Marker } from '../../map/map.component';
+import { MapComponent, MapOnClickEvent, Marker } from '../../map/map.component';
 
 interface ShopFormularFields{
     name: string;
@@ -36,6 +36,7 @@ export class ShopFormularComponent{
     }
 
     onSubmit(values: ShopFormularFields){
+        console.log(values);
     }
 
     get unsubmitable() : boolean{
@@ -43,8 +44,19 @@ export class ShopFormularComponent{
             .some((x: string|number) => 
                 x === undefined || 
                 x === null || (
-                    typeof(x) === typeof("") &&
+                    typeof(x) === "string" &&
                     (x as string).length === 0)
                 );
+    }
+
+    mapOnClick(event: MapOnClickEvent){
+        console.log(event);
+        this.map.addMarker({
+            lat: event.coords.lat,
+            lng: event.coords.lng,
+            label: "ICI"
+        } as Marker);
+        (this.formGroup.value as ShopFormularFields).lattitude = event.coords.lat;
+        (this.formGroup.value as ShopFormularFields).longitude = event.coords.lng;
     }
 }

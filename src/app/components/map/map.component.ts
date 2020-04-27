@@ -7,6 +7,13 @@ export interface Marker{
     label: string
 }
 
+export interface MapOnClickEvent{
+    coords: {
+        lat: number,
+        lng: number
+    };
+    placeId: number;
+}
 
 @Component({
     selector: 'map',
@@ -15,7 +22,7 @@ export interface Marker{
 })
 export class MapComponent{
     @Input() maxMarkers: number = 0;
-    @Input() onClickEvent: (event :{coords: {lat: number, lng: number}, placeId: number}) => any = (event) => {};
+    @Input() onClickEvent: (event :MapOnClickEvent) => any = (event) => {};
 
     @ViewChild('map') map: AgmMap;
     markers: Marker[] = [];
