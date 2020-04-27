@@ -1,0 +1,32 @@
+<p>beer-formular works!</p>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+
+    <div class = "row">
+        <mat-form-field>
+            <mat-label for="name">Name</mat-label>
+            <input matInput id="name" type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Type" formControlName="type">
+                <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Alcohol Level" formControlName="alcoholLevel">
+                <mat-option *ngFor="let alcoholLevel of alcoholLevels" [value]="alcoholLevel">{{alcoholLevel}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="desc">Description</mat-label>
+            <textarea id="desc" matInput formControlName="desc"></textarea>
+        </mat-form-field>
+
+        <div>
+            <input type="file" accept="image/*" (change)="onFileSelect($event)"><br><br>
+         </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Purchase</button>
+</form>
