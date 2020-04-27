@@ -12,7 +12,6 @@ interface ShopFormularFields{
     profilepic: string;
 }
 
-
 @Component({
     selector: 'shop-formular',
     templateUrl: './shop-formular.component.html',
@@ -27,11 +26,11 @@ export class ShopFormularComponent{
         this.formGroup = this.formBuilder.group({
             name: null,
             description: null,
-            longitude: 0,
-            lattitude: 0,
+            longitude: null,
+            lattitude: null,
             type: null,
             address: null,
-            profilepic: '4',
+            profilepic: null,
         } as ShopFormularFields);
     }
 
@@ -46,7 +45,7 @@ export class ShopFormularComponent{
                 x === null || (
                     typeof(x) === "string" &&
                     (x as string).length === 0)
-                );
+            );
     }
 
     mapOnClick(event: MapOnClickEvent){
