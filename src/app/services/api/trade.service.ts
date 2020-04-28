@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../tools/http.service';
+import { HttpService, ENC_TYPE_FORM_DATA } from '../tools/http.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Trade } from 'src/app/models/Trade';
@@ -25,7 +25,7 @@ export class TradeService{
         });
     }
 
-    get(id: number, subscriber: (shop: Trade) => void, error?: (error: HttpErrorResponse) => void){
+    get(id: number, subscriber: (shop: Trade) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
         return this.httpService.get(`${this.controllerUrl}/${id}`)
         .subscribe({
             next: subscriber,
@@ -33,15 +33,22 @@ export class TradeService{
         });
     }
 
-    post(shop: Trade, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void){
+    post(shop: Trade, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
+        var file: File|string = shop.profilepic;
+        shop.profilepic = null;
         return this.httpService.post(this.controllerUrl, shop, this.token)
         .subscribe({
-            next: subscriber,
+            next: (id: number) => {
+                if(file && typeof(file) !== "string")
+                    return this._sendImage(id, file as File, subscriber, error);
+                else
+                    subscriber(id);
+            },
             error: error
-        });
+        });  
     }
 
-    put(shop: Trade, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void){
+    put(shop: Trade, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
         return this.httpService.put(this.controllerUrl, shop, this.token)
         .subscribe({
             next: subscriber,
@@ -49,10 +56,20 @@ export class TradeService{
         });
     }
 
-    delete(id: number, subscriber: (result: null) => void, error?: (error: HttpErrorResponse) => void){
+    delete(id: number, subscriber: (result: null) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
         return this.httpService.delete(`${this.controllerUrl}/${id}`, this.token)
         .subscribe({
             next: subscriber,
+            error: error
+        });
+    }
+
+    private _sendImage(id: number, file: File, subscriber: (result: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{ 
+        let fd: FormData = new FormData();
+        fd.set("file", file);
+        return this.httpService.patch(`${this.controllerUrl}/image/${id}`, fd, this.token, ENC_TYPE_FORM_DATA)
+        .subscribe({
+            next: () => subscriber(id),
             error: error
         });
     }
