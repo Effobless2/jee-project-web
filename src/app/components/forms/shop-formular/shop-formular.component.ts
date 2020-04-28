@@ -49,7 +49,7 @@ export class ShopFormularComponent{
     }
 
     mapOnClick(event: MapOnClickEvent){
-        console.log(event);
+        this.map.clearMarkers();
         this.map.addMarker({
             lat: event.coords.lat,
             lng: event.coords.lng,

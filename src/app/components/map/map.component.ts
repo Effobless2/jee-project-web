@@ -21,7 +21,6 @@ export interface MapOnClickEvent{
     styleUrls: ['./map.component.css']
 })
 export class MapComponent{
-    @Input() maxMarkers: number = 0;
     @Input() onClickEvent: (event :MapOnClickEvent) => any = (event) => {};
 
     @ViewChild('map') map: AgmMap;
@@ -34,13 +33,11 @@ export class MapComponent{
         };
     }
 
-    public addMarker(marker: Marker){
-        if(this.markers.length < this.maxMarkers)
-            this.markers.push(marker);
-        else{
-            if(this.maxMarkers == 1){
-                this.markers[0] = marker;
-            }
-        }
+    public addMarker(marker: Marker) {
+        this.markers.push(marker);
+    }
+
+    public clearMarkers() {
+        this.markers = [];
     }
 }
