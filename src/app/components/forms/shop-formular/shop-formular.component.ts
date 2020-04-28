@@ -59,11 +59,17 @@ export class ShopFormularComponent{
             lng: event.coords.lng,
             label: "ICI"
         } as Marker);
-        (this.formGroup.value as ShopFormularFields).lattitude = event.coords.lat;
-        (this.formGroup.value as ShopFormularFields).longitude = event.coords.lng;
+        this.formGroup.patchValue({
+            lattitude: event.coords.lat
+        });
+        this.formGroup.patchValue({
+            longitude: event.coords.lng
+        });
     }
 
     onFileSelected(_event: FileSelectChangeEvent){
-        (this.formGroup.value as ShopFormularFields).profilepic = this.fileUploader.image;
+        this.formGroup.patchValue({
+            profilepic: this.fileUploader.image
+        });
     }
 }
