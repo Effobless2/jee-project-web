@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapComponent, MapOnClickEvent, Marker } from '../../map/map.component';
 import { FileUploaderComponent, FileSelectChangeEvent } from '../../file-uploader/file-uploader.component';
+import { Trade } from 'src/app/models/Trade';
+import { TradeService } from 'src/app/services/api/trade.service';
 
 interface ShopFormularFields{
     name: string;
@@ -10,7 +12,7 @@ interface ShopFormularFields{
     lattitude: number;
     type: string;
     address: string;
-    profilepic: File;
+    profilepic: string|File;
 }
 
 @Component({
@@ -24,6 +26,8 @@ export class ShopFormularComponent{
     @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
 
     constructor(
+        private tradeService: TradeService,
+
         private formBuilder: FormBuilder
     ){
         this.formGroup = this.formBuilder.group({
@@ -38,7 +42,10 @@ export class ShopFormularComponent{
     }
 
     onSubmit(values: ShopFormularFields){
-        console.log(values);
+        let trade: Trade = values;
+        this.tradeService.post(trade, (id: number) => {
+            console.log(`Created :${id}`);
+        });
     }
 
     get unsubmitable() : boolean{
