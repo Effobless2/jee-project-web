@@ -21,7 +21,7 @@ export interface MapOnClickEvent{
     styleUrls: ['./map.component.css']
 })
 export class MapComponent{
-    @Input() onClickEvent: (event :MapOnClickEvent) => any = (event) => {};
+    @Input() onClickEvent: (event :MapOnClickEvent) => any;
 
     @ViewChild('map') map: AgmMap;
     markers: Marker[] = [];

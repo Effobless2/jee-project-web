@@ -1,0 +1,9 @@
+img {
+    height:300pt;
+    max-width: 400pt;
+    object-fit: contain;
+}
+
+div > * {
+    margin: 5pt;
+}

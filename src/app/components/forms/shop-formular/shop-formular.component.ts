@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapComponent, MapOnClickEvent, Marker } from '../../map/map.component';
+import { FileUploaderComponent, FileSelectChangeEvent } from '../../file-uploader/file-uploader.component';
 
 interface ShopFormularFields{
     name: string;
@@ -9,7 +10,7 @@ interface ShopFormularFields{
     lattitude: number;
     type: string;
     address: string;
-    profilepic: string;
+    profilepic: File;
 }
 
 @Component({
@@ -20,6 +21,8 @@ interface ShopFormularFields{
 export class ShopFormularComponent{
     formGroup: FormGroup;
     @ViewChild('map') map: MapComponent;
+    @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
+
     constructor(
         private formBuilder: FormBuilder
     ){
@@ -40,11 +43,12 @@ export class ShopFormularComponent{
 
     get unsubmitable() : boolean{
         return Object.values(this.formGroup.value)
-            .some((x: string|number) => 
+            .some((x: string|number|File) => 
                 x === undefined || 
                 x === null || (
                     typeof(x) === "string" &&
-                    (x as string).length === 0)
+                    (x as string).length === 0
+                )
             );
     }
 
@@ -57,5 +61,9 @@ export class ShopFormularComponent{
         } as Marker);
         (this.formGroup.value as ShopFormularFields).lattitude = event.coords.lat;
         (this.formGroup.value as ShopFormularFields).longitude = event.coords.lng;
+    }
+
+    onFileSelected(_event: FileSelectChangeEvent){
+        (this.formGroup.value as ShopFormularFields).profilepic = this.fileUploader.image;
     }
 }

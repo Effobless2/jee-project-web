@@ -52,6 +52,7 @@ import { ShopFormularComponent } from './components/forms/shop-formular/shop-for
 import { MapComponent } from './components/map/map.component';
 import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -84,6 +85,7 @@ export function provideConfig() {
     ShopFormularComponent,
     BeerFormularComponent,
     MapComponent,
+    FileUploaderComponent
   ],
   imports: [
     SocialLoginModule,

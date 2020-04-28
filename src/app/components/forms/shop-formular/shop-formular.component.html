@@ -29,4 +29,5 @@
     </div>
     
     <map class="col-md-6" #map [onClickEvent]="mapOnClick.bind(this)"></map>
+    <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
 </form>
