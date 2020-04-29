@@ -1,5 +1,9 @@
 @import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body, app-root {
+  height: 100%;
+  overflow: auto;
+}
 
 html, body, app-root {
   height: 100%;
@@ -7,7 +11,7 @@ html, body, app-root {
 }
 
 body{
-  background-image: url('/assets/pattern.png');
+  background-image: url('/assets/pattern.svg');
   margin: 0px;
   padding: 0px;
 }

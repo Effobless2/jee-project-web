@@ -1,0 +1,33 @@
+.example-card {
+  width: 70%;
+  min-height: 65%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+  background: center url("../../../assets/beers-variety-darker.jpg");
+  background-size: cover;
+  color: white;
+}
+
+.header-text {
+  margin: auto;
+  text-align: center;
+}
+
+mat-card-subtitle {
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
+
+.title {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+mat-card-content {
+  margin: 90px;
+  text-align: justify;
+  font-weight: bold;
+}

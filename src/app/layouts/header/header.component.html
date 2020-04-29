@@ -1,6 +1,18 @@
-<nav class="mat-tab-nav-bar">
-  <a routerLink="/"><button mat-button>🍻 Beerer</button></a>
-  <a routerLink="/about"><button mat-button>About</button></a>
-  <a routerLink="/beers-list"><button mat-button>Beers list</button></a>
-  <a routerLink="/shops-list"><button mat-button>Shops list</button></a>
-</nav>
+<div class="header">
+    <nav class="mat-tab-nav-bar">
+      <div class="tabs">
+        <a routerLink="/"><img class="logo" src="../../../assets/beerer_logo2.png" alt="Beerer's logo"></a>
+        <button mat-button routerLink="/about">About</button>
+        <button mat-button routerLink="/beers-list">Beers list</button>
+        <button mat-button routerLink="/shops-list">Shops list</button>
+      </div>
+      <div class="tools">
+        <button mat-icon-button color="primary">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+    </nav>
+</div>
