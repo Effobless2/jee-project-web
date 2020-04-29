@@ -1,3 +1,16 @@
-.mat-tab-nav-bar {
+.logo {
+  height: 50px;
+  vertical-align: middle;
   margin: 5px;
+}
+
+.mat-tab-nav-bar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tools, .tabs {
+  margin-top: auto;
+  margin-bottom: auto;
 }
