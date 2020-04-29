@@ -6,6 +6,8 @@ import { Trade } from 'src/app/models/Trade';
 import { TradeService } from 'src/app/services/api/trade.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToasterService } from 'src/app/services/tools/toaster.service';
+import { Router } from '@angular/router';
+import { ROUTES } from 'src/app/router/routes';
 
 interface ShopFormularFields{
     name: string;
@@ -32,6 +34,7 @@ export class ShopFormularComponent{
         
         private formBuilder: FormBuilder,
         private toatrService: ToasterService,
+        private router: Router,
     ){
         this.formGroup = this.formBuilder.group({
             name: null,
@@ -42,24 +45,6 @@ export class ShopFormularComponent{
             address: null,
             profilepic: null,
         } as ShopFormularFields);
-    }
-
-    onSubmit(values: ShopFormularFields){
-        let trade: Trade = values;
-        this.tradeService.post(
-            trade,
-            (id: number) => {
-                this.toatrService.success(
-                    `Votre commerce ${trade.name} a été créé !`,
-                    "Vous pourrez y accéder à tout moment depuis votre profil"
-                );
-            },
-            (error: HttpErrorResponse) => {
-                this.toatrService.error(
-                    "Une erreur est survenue !",
-                    error.message
-                );
-            });
     }
 
     get unsubmitable() : boolean{
@@ -101,5 +86,33 @@ export class ShopFormularComponent{
         this.formGroup.patchValue({
             longitude: longitude
         });
+    }
+
+    onSubmit(values: ShopFormularFields){
+        let trade: Trade = values;
+        this.tradeService.post(
+            trade,
+            (id: number) => {
+                trade.id = id;
+                this._showSuccess(trade);
+                
+            },
+            (error: HttpErrorResponse) => {
+                this._showError(trade, error);
+            });
+    }
+
+    private _showError(trade: Trade, error: HttpErrorResponse){
+        this.toatrService.error(
+            "Une erreur est survenue !",
+            error.message
+        );
+    }
+
+    private _showSuccess(trade: Trade){
+        this.toatrService.success(
+            `Votre commerce ${trade.name} a été créé !`,
+            "Vous pourrez y accéder à tout moment depuis votre profil"
+        ).onTap.subscribe(() => this.router.navigate([ROUTES.shops]));
     }
 }

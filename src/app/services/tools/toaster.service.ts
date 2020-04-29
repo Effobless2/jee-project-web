@@ -1,4 +1,4 @@
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ActiveToast } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -10,11 +10,11 @@ export class ToasterService{
         progressBar: true
     }
 
-    public success(title: string, message){
-        this.toastrService.success(message, title, this._options);
+    public success(title: string, message): ActiveToast<any>{
+        return this.toastrService.success(message, title, this._options);
     }
 
-    public error(title: string, message){
-        this.toastrService.error(message, title, this._options);
+    public error(title: string, message): ActiveToast<any>{
+        return this.toastrService.error(message, title, this._options);
     }
 }
