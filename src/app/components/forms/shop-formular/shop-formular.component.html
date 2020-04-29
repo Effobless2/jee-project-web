@@ -27,6 +27,6 @@
         <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>Purchase</button>
     </div>
     
-    <map class="col-md-6" #map [onClickEvent]="mapOnClick.bind(this)"></map>
+    <map class="col-md-6" #map [onClickedMapEvent]="mapOnClick.bind(this)" [onClickedMarkerEvent]="markerOnClick.bind(this)"></map>
     <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
 </form>

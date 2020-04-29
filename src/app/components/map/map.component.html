@@ -1,8 +1,9 @@
-<agm-map [latitude]="0" [longitude]="0" #map (mapClick)="onClickEvent($event)">
+<agm-map [latitude]="0" [longitude]="0" #map (mapClick)="onClickedMapEvent($event)">
     <agm-marker 
-        *ngFor="let marker of markers" 
+        *ngFor="let marker of markers; let i = index" 
         [latitude]="marker.lat" 
         [longitude]="marker.lng" 
-        [label]="{color: 'white', text: marker.label}">
+        [label]="{color: 'white', text: marker.label}"
+        (markerClick)="onClickedMarkerEvent(marker, i)">
     </agm-marker>
 </agm-map>

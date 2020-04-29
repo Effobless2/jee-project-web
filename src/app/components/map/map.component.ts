@@ -2,9 +2,10 @@ import { Component, ViewChild, Input } from "@angular/core";
 import { AgmMap } from '@agm/core';
 
 export interface Marker{
-    lat: number,
-    lng: number,
-    label: string
+    lat: number;
+    lng: number;
+    label: string;
+    data?: any;
 }
 
 export interface MapOnClickEvent{
@@ -21,7 +22,8 @@ export interface MapOnClickEvent{
     styleUrls: ['./map.component.css']
 })
 export class MapComponent{
-    @Input() onClickEvent: (event :MapOnClickEvent) => any;
+    @Input() onClickedMapEvent: (event :MapOnClickEvent) => any = (event) => {};
+    @Input() onClickedMarkerEvent: (marker: Marker, index: number) => any = (marker, index) => {};
 
     @ViewChild('map') map: AgmMap;
     markers: Marker[] = [];
@@ -35,6 +37,11 @@ export class MapComponent{
 
     public addMarker(marker: Marker) {
         this.markers.push(marker);
+    }
+
+    public deleteMarker(index: number){
+        if(index < this.markers.length)
+            this.markers.splice(index, 1);
     }
 
     public clearMarkers() {

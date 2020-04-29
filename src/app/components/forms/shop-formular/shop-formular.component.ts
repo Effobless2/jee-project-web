@@ -18,7 +18,7 @@ interface ShopFormularFields{
 @Component({
     selector: 'shop-formular',
     templateUrl: './shop-formular.component.html',
-    styleUrls: ['./shop-formular.component.css']
+    styleUrls:  ['./shop-formular.component.css']
 })
 export class ShopFormularComponent{
     formGroup: FormGroup;
@@ -66,17 +66,26 @@ export class ShopFormularComponent{
             lng: event.coords.lng,
             label: "ICI"
         } as Marker);
-        this.formGroup.patchValue({
-            lattitude: event.coords.lat
-        });
-        this.formGroup.patchValue({
-            longitude: event.coords.lng
-        });
+        this._updateCoordsForm(event.coords.lat, event.coords.lng);
+    }
+
+    markerOnClick(_marker: Marker, index: number){
+        this.map.deleteMarker(index);
+        this._updateCoordsForm(null, null);
     }
 
     onFileSelected(_event: FileSelectChangeEvent){
         this.formGroup.patchValue({
             profilepic: this.fileUploader.image
+        });
+    }
+
+    private _updateCoordsForm(lattitude: number, longitude: number){
+        this.formGroup.patchValue({
+            lattitude: lattitude
+        });
+        this.formGroup.patchValue({
+            longitude: longitude
         });
     }
 }
