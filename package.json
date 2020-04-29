@@ -24,6 +24,7 @@
     "@babel/compat-data": "^7.8.0",
     "@ngrx/store": "^9.0.0",
     "angularx-social-login": "^2.2.1",
+    "jwt-decode": "^2.2.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
