@@ -22,11 +22,11 @@ export interface MapOnClickEvent{
     styleUrls: ['./map.component.css']
 })
 export class MapComponent{
-    @Input() onClickedMapEvent: (event :MapOnClickEvent) => any = (event) => {};
-    @Input() onClickedMarkerEvent: (marker: Marker, index: number) => any = (marker, index) => {};
+    @Input() onClickedMapEvent: (event :MapOnClickEvent) => any = () => {};
+    @Input() onClickedMarkerEvent: (marker: Marker, index: number) => any = () => {};
 
     @ViewChild('map') map: AgmMap;
-    markers: Marker[] = [];
+    public markers: Marker[] = [];
 
     public get coordinates() : {longitude: number, latitude: number}{
         return {

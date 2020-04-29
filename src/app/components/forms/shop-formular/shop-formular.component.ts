@@ -4,6 +4,8 @@ import { MapComponent, MapOnClickEvent, Marker } from '../../map/map.component';
 import { FileUploaderComponent, FileSelectChangeEvent } from '../../file-uploader/file-uploader.component';
 import { Trade } from 'src/app/models/Trade';
 import { TradeService } from 'src/app/services/api/trade.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToasterService } from 'src/app/services/tools/toaster.service';
 
 interface ShopFormularFields{
     name: string;
@@ -27,8 +29,9 @@ export class ShopFormularComponent{
 
     constructor(
         private tradeService: TradeService,
-
-        private formBuilder: FormBuilder
+        
+        private formBuilder: FormBuilder,
+        private toatrService: ToasterService,
     ){
         this.formGroup = this.formBuilder.group({
             name: null,
@@ -43,9 +46,20 @@ export class ShopFormularComponent{
 
     onSubmit(values: ShopFormularFields){
         let trade: Trade = values;
-        this.tradeService.post(trade, (id: number) => {
-            console.log(`Created :${id}`);
-        });
+        this.tradeService.post(
+            trade,
+            (id: number) => {
+                this.toatrService.success(
+                    `Votre commerce ${trade.name} a été créé !`,
+                    "Vous pourrez y accéder à tout moment depuis votre profil"
+                );
+            },
+            (error: HttpErrorResponse) => {
+                this.toatrService.error(
+                    "Une erreur est survenue !",
+                    error.message
+                );
+            });
     }
 
     get unsubmitable() : boolean{

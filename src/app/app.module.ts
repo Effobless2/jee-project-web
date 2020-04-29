@@ -19,7 +19,8 @@ import { MatInputModule } from '@angular/material/input'
 //import { MatFormFieldModule } from '@angular/material/form-field'
 //import { MatSnackBarModule } from '@angular/material/snack-bar'
 //import { MatDialogModule } from '@angular/material/dialog'
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { ToastrModule } from 'ngx-toastr';
 
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -53,6 +54,7 @@ import { MapComponent } from './components/map/map.component';
 import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { ToasterService } from './services/tools/toaster.service';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -111,6 +113,7 @@ export function provideConfig() {
     AgmCoreModule.forRoot({
       apiKey: environment.googleCloudAPIClientId
     }),
+    ToastrModule.forRoot(),
   ],
   providers: [
     {
@@ -121,7 +124,8 @@ export function provideConfig() {
     UserService,
     BeerService,
     TradeService,
-    HttpService
+    HttpService,
+    ToasterService,
   ],
   bootstrap: [AppComponent]
 })
