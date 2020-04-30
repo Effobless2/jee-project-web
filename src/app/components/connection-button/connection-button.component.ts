@@ -34,13 +34,13 @@ export class ConnectionBtnComponent{
     }
 
     get avatarUrl(): string {
-        return this.loggedIn ? this.user.avatarUrl : "https://static.thenounproject.com/png/363639-200.png";
+        return this.loggedIn ? this.user.avatarUrl : null;
     }
 
     async connectionMethod(): Promise<void> {
         this.loggedIn ? this.signOut() : this.signInWithGoogle();
     }
-  
+
     async signInWithGoogle(): Promise<void> {
         await this.authService.signIn();
     }
