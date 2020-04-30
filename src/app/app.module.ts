@@ -5,7 +5,7 @@ import { AppComponent } from './layouts/root/app.component';
 import { MatMenuModule } from '@angular/material/menu'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule, WavesModule  } from 'angular-bootstrap-md'
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 //import { MatButtonModule } from '@angular/material/button'
@@ -52,7 +52,7 @@ import { TradeService } from './services/api/trade.service';
 import { ShopFormularComponent } from './components/forms/shop-formular/formular/shop-formular.component';
 import { MapComponent } from './components/map/map.component';
 import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ToasterService } from './services/tools/toaster.service';
 import { GeocodingService } from './services/geocoding.service';
@@ -120,6 +120,7 @@ export function provideConfig() {
       apiKey: environment.googleCloudAPIClientId
     }),
     ToastrModule.forRoot(),
+    FormsModule,
   ],
   providers: [
     {

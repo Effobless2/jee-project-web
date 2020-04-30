@@ -27,21 +27,8 @@ button{
     width: fit-content;
 }
 
-.label-file {
+file-uploader {
     align-self: center;
-    border: 1px solid #764ebe;
-    border-radius: 3px;
-    padding: 5px;
-    text-align: center;
-    width: fit-content;
-    cursor: pointer;
-    color: #764ebe;
-    font-weight: bold;
-}
-.label-file:hover {
-    box-shadow: 3px 5px 8px 0px #764ebe;
-    background-color: #764ebe;
-    color: white;
 }
 
 .input-file {
