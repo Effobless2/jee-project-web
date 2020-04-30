@@ -1,4 +1,4 @@
-import { Component, ViewChild, Inject, NgZone } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapComponent, MapOnClickEvent, Marker } from '../../../map/map.component';
 import { FileUploaderComponent, FileSelectChangeEvent } from '../../../file-uploader/file-uploader.component';
@@ -65,6 +65,11 @@ export class ShopFormularComponent{
             );
     }
 
+    get locationUnsearchable(): boolean{
+        let address: string = (this.formGroup.value as ShopFormularFields).address;
+        return !address || address.length === 0;
+    }
+
     mapOnClick(event: MapOnClickEvent){
         this.map.clearMarkers();
         this.map.addMarker({
@@ -72,6 +77,9 @@ export class ShopFormularComponent{
             lng: event.coords.lng,
             label: "ICI"
         } as Marker);
+        this.ngZone.run(() => {
+            this.map.setCenter(event.coords);
+        });
         this._updateCoordsForm(event.coords.lat, event.coords.lng);
         this.geocoderService.findLocation(event.coords, this._openDialog.bind(this),
         _ => this._showError(null, null, "Adresse introvable"));
@@ -117,11 +125,31 @@ export class ShopFormularComponent{
             });
     }
 
+    searchLocation(){
+        let address: string = (this.formGroup.value as ShopFormularFields).address;
+        this.geocoderService.findLocation(address, this._addMarker.bind(this), () => this._showError(null, null, "Location not found"));
+    }
+
+    private _addMarker(locations: GeocoderResult[]) {
+        this.map.clearMarkers();
+        let loc = {lat: locations[0].geometry.location.lat(), lng:locations[0].geometry.location.lng() };
+        this.map.addMarker({
+            lat: loc.lat,
+            lng: loc.lng,
+            label: "ICI"
+        } as Marker);
+        this.ngZone.run(() => {
+            this.map.setCenter(loc);
+        });
+    }
+
     private _showError(trade: Trade, error: HttpErrorResponse, message?: string){
-        this.toatrService.error(
-            "Une erreur est survenue !",
-            message ?? error.message
-        );
+        this.ngZone.run(() => {
+            this.toatrService.error(
+                "Une erreur est survenue !",
+                message ?? error.message
+                );
+        });
     }
 
     private _showSuccess(trade: Trade){
@@ -134,10 +162,10 @@ export class ShopFormularComponent{
     private _openDialog(values: GeocoderResult[]): void {
         this.ngZone.run(() => 
             this.dialog.open(AddressListModalComponent, {
-            data: {
-                datas: values.map((x: GeocoderResult) => x.formatted_address),
-                provider: this._updateAddress.bind(this)
-            }
+                data: {
+                    datas: values.map((x: GeocoderResult) => x.formatted_address),
+                    provider: this._updateAddress.bind(this)
+                }
             })
         );
     }
