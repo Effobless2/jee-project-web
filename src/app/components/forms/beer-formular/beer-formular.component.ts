@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {FileSelectChangeEvent, FileUploaderComponent} from "../../file-uploader/file-uploader.component";
 
 
 interface BeerFormularFields{
@@ -18,6 +19,7 @@ interface BeerFormularFields{
 })
 export class BeerFormularComponent implements OnInit {
 
+  @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
   alcoholLevels = [];
   types = ["Blonde", "Brune", "Rousse", "Chatain", "Chauve"];
   imageSrc: any = '';
@@ -51,6 +53,12 @@ export class BeerFormularComponent implements OnInit {
   onFileChanged(event) {
     this.selectFile = event.target.files[0];
     this.selectFileName = event.target.files[0].name;
+  }
+
+  onFileSelected(_event: FileSelectChangeEvent){
+    this.formGroup.patchValue({
+      pic: this.fileUploader.image
+    });
   }
 
 }

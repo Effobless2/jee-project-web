@@ -23,8 +23,7 @@
       <textarea id="desc" matInput formControlName="desc"></textarea>
     </mat-form-field>
 
-    <label for="file" class="label-file">Choose image</label>
-    <input id="file" class="input-file" type="file" (change)="onFileChanged($event)" accept="image/*" #fileInput>
+    <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
     <p>{{selectFileName}}</p>
 
     <button mat-raised-button color="primary" type="submit">Purchase</button>
