@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule, WavesModule  } from 'angular-bootstrap-md'
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
-//import { MatRadioModule } from '@angular/material/radio'
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 //import { MatButtonModule } from '@angular/material/button'
 //import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatInputModule } from '@angular/material/input'
@@ -49,13 +49,15 @@ import { HttpService } from './services/tools/http.service'
 import { UserService } from './services/api/user.service';
 import { BeerService } from './services/api/beer.service';
 import { TradeService } from './services/api/trade.service';
-import { ShopFormularComponent } from './components/forms/shop-formular/shop-formular.component';
+import { ShopFormularComponent } from './components/forms/shop-formular/formular/shop-formular.component';
 import { MapComponent } from './components/map/map.component';
 import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ToasterService } from './services/tools/toaster.service';
 import { GeocodingService } from './services/geocoding.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddressListModalComponent } from './components/forms/shop-formular/modal/address-list-modal.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -86,6 +88,7 @@ export function provideConfig() {
     ShopsCardComponent,
     ConnectionBtnComponent,
     ShopFormularComponent,
+    AddressListModalComponent,
     BeerFormularComponent,
     MapComponent,
     FileUploaderComponent
@@ -111,6 +114,8 @@ export function provideConfig() {
     MatIconModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatButtonToggleModule,
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleCloudAPIClientId
     }),

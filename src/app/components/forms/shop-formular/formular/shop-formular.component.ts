@@ -1,13 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MapComponent, MapOnClickEvent, Marker } from '../../map/map.component';
-import { FileUploaderComponent, FileSelectChangeEvent } from '../../file-uploader/file-uploader.component';
+import { MapComponent, MapOnClickEvent, Marker } from '../../../map/map.component';
+import { FileUploaderComponent, FileSelectChangeEvent } from '../../../file-uploader/file-uploader.component';
 import { Trade } from 'src/app/models/Trade';
 import { TradeService } from 'src/app/services/api/trade.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToasterService } from 'src/app/services/tools/toaster.service';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/router/routes';
+import { AddressListModalComponent } from '../modal/address-list-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { GeocodingService } from 'src/app/services/geocoding.service';
+import { GeocoderResult } from '@agm/core';
 
 interface ShopFormularFields{
     name: string;
@@ -31,10 +35,13 @@ export class ShopFormularComponent{
 
     constructor(
         private tradeService: TradeService,
+        private geocoderService: GeocodingService,
         
         private formBuilder: FormBuilder,
         private toatrService: ToasterService,
         private router: Router,
+        private dialog: MatDialog,
+        private ngZone: NgZone
     ){
         this.formGroup = this.formBuilder.group({
             name: null,
@@ -66,6 +73,8 @@ export class ShopFormularComponent{
             label: "ICI"
         } as Marker);
         this._updateCoordsForm(event.coords.lat, event.coords.lng);
+        this.geocoderService.findLocation(event.coords, this._openDialog.bind(this),
+        _ => this._showError(null, null, "Adresse introvable"));
     }
 
     markerOnClick(_marker: Marker, index: number){
@@ -88,6 +97,12 @@ export class ShopFormularComponent{
         });
     }
 
+    private _updateAddress(value: string){
+        this.formGroup.patchValue({
+            address: value
+        });
+    }
+
     onSubmit(values: ShopFormularFields){
         let trade: Trade = values;
         this.tradeService.post(
@@ -102,10 +117,10 @@ export class ShopFormularComponent{
             });
     }
 
-    private _showError(trade: Trade, error: HttpErrorResponse){
+    private _showError(trade: Trade, error: HttpErrorResponse, message?: string){
         this.toatrService.error(
             "Une erreur est survenue !",
-            error.message
+            message ?? error.message
         );
     }
 
@@ -114,5 +129,16 @@ export class ShopFormularComponent{
             `Votre commerce ${trade.name} a été créé !`,
             "Vous pourrez y accéder à tout moment depuis votre profil"
         ).onTap.subscribe(() => this.router.navigate([ROUTES.shops]));
+    }
+
+    private _openDialog(values: GeocoderResult[]): void {
+        this.ngZone.run(() => 
+            this.dialog.open(AddressListModalComponent, {
+            data: {
+                datas: values.map((x: GeocoderResult) => x.formatted_address),
+                provider: this._updateAddress.bind(this)
+            }
+            })
+        );
     }
 }

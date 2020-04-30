@@ -6,4 +6,4 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
- }
+}
