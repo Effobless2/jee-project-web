@@ -55,6 +55,7 @@ import { BeerFormularComponent } from './components/forms/beer-formular/beer-for
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ToasterService } from './services/tools/toaster.service';
+import { GeocodingService } from './services/geocoding.service';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -127,6 +128,7 @@ export function provideConfig() {
     TradeService,
     HttpService,
     ToasterService,
+    GeocodingService,
   ],
   bootstrap: [AppComponent]
 })
