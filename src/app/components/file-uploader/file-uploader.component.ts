@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 
 export interface FileSelectChangeEvent{
     target: {
@@ -12,9 +12,11 @@ export interface FileSelectChangeEvent{
     styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent{
+    @ViewChild('fileInput') fileInput: ElementRef;
     image: File;
     imagePict: string|ArrayBuffer;
-    @Input('subscriber') subscriber :({target: {files: FileList}}) => any;
+    reader: FileReader;
+    @Input('subscriber') subscriber :({target: {files: FileList}}) => any = () => {};
     @Input('previsualization') previsualization: boolean = true;
 
     get imageName(): string{
@@ -26,21 +28,23 @@ export class FileUploaderComponent{
             result += "...";
         return result;
     }
-    
+
     onFileSelected(event :FileSelectChangeEvent){
         this.image = event.target.files[0] || this.image;
         if(!this.image)
             return null;
-        var reader: FileReader = new FileReader();
-        reader.readAsDataURL(this.image); 
-        reader.onload = (_event) => { 
-          this.imagePict = reader.result;
+        this.reader = new FileReader();
+        this.reader.readAsDataURL(this.image);
+        this.reader.onload = (_event) => {
+          this.imagePict = this.reader.result;
           this.subscriber(event);
         }
     }
-    
+
     onFileDelete(){
         this.image = this.imagePict = null;
+        this.reader = null;
+        this.fileInput.nativeElement.value = null;
         this.subscriber({
             target: {
                 files: null

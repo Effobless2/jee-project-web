@@ -1,32 +1,32 @@
 <div class="component">
-    <h1>Beer formular</h1>
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-            <mat-form-field>
-                <mat-label for="name">Name</mat-label>
-                <input matInput id="name" type="text" formControlName="name">
-            </mat-form-field>
+  <h1>Beer formular</h1>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+    <mat-form-field>
+      <mat-label for="name">Name</mat-label>
+      <input matInput id="name" type="text" formControlName="name">
+    </mat-form-field>
 
-            <mat-form-field>
-                <mat-select placeholder="Type" formControlName="type">
-                    <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Type" formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-            <mat-form-field>
-                <mat-select placeholder="Alcohol Level" formControlName="alcoholLevel">
-                    <mat-option *ngFor="let alcoholLevel of alcoholLevels" [value]="alcoholLevel">{{alcoholLevel}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Alcohol Level" formControlName="alcoholLevel">
+        <mat-option *ngFor="let alcoholLevel of alcoholLevels" [value]="alcoholLevel">{{alcoholLevel}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-            <mat-form-field>
-                <mat-label for="desc">Description</mat-label>
-                <textarea id="desc" matInput formControlName="desc"></textarea>
-            </mat-form-field>
+    <mat-form-field>
+      <mat-label for="desc">Description</mat-label>
+      <textarea id="desc" matInput formControlName="desc"></textarea>
+    </mat-form-field>
 
-            <label for="file" class="label-file">Choose image</label>
-            <input id="file" class="input-file" type="file" (change)="onFileChanged($event)" accept="image/*" #fileInput>
-            <p>{{selectFileName}}</p>
+    <label for="file" class="label-file">Choose image</label>
+    <input id="file" class="input-file" type="file" (change)="onFileChanged($event)" accept="image/*" #fileInput>
+    <p>{{selectFileName}}</p>
 
-        <button mat-raised-button color="primary" type="submit">Purchase</button>
-    </form>
+    <button mat-raised-button color="primary" type="submit">Purchase</button>
+  </form>
 </div>
