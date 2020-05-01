@@ -20,7 +20,7 @@ interface ShopFormularFields{
     lattitude: number;
     type: string;
     address: string;
-    profilepic: string|File;
+    profilePict: string|File;
 }
 
 @Component({
@@ -50,7 +50,7 @@ export class ShopFormularComponent{
             lattitude: null,
             type: null,
             address: null,
-            profilepic: null,
+            profilePict: null,
         } as ShopFormularFields);
     }
 
@@ -92,15 +92,13 @@ export class ShopFormularComponent{
 
     onFileSelected(_event: FileSelectChangeEvent){
         this.formGroup.patchValue({
-            profilepic: this.fileUploader.image
+            profilePict: this.fileUploader.image
         });
     }
 
     private _updateCoordsForm(lattitude: number, longitude: number){
         this.formGroup.patchValue({
-            lattitude: lattitude
-        });
-        this.formGroup.patchValue({
+            lattitude: lattitude,
             longitude: longitude
         });
     }
@@ -138,6 +136,7 @@ export class ShopFormularComponent{
             lng: loc.lng,
             label: "ICI"
         } as Marker);
+        this._updateCoordsForm(loc.lat, loc.lng);
         this.ngZone.run(() => {
             this.map.setCenter(loc);
         });

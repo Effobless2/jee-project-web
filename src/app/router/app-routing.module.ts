@@ -5,6 +5,8 @@ import { AboutComponent } from '../components/about/about.component';
 import { BeersListComponent } from '../components/beers/beers-list/beers-list.component';
 import { ShopsListComponent } from "../components/shops/shops-list/shops-list.component";
 import { ROUTES } from './routes';
+import { BeerFormularComponent } from '../components/forms/beer-formular/beer-formular.component';
+import { ShopFormularComponent } from '../components/forms/shop-formular/formular/shop-formular.component';
 
 
 const routes: Routes = [
@@ -12,7 +14,9 @@ const routes: Routes = [
   { path: ROUTES.root, component: HomeComponent },
   { path: ROUTES.about, component: AboutComponent },
   { path: ROUTES.beers, component: BeersListComponent },
-  { path: ROUTES.shops, component: ShopsListComponent }
+  { path: ROUTES.shops, component: ShopsListComponent },
+  { path: ROUTES.beerForm, component: BeerFormularComponent },
+  { path: ROUTES.shopForm, component: ShopFormularComponent },
 ]
 
 @NgModule({
