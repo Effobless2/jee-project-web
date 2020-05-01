@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone } from '@angular/core';
+import { Component, ViewChild, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapComponent, MapOnClickEvent, Marker } from '../../../map/map.component';
 import { FileUploaderComponent, FileSelectChangeEvent } from '../../../file-uploader/file-uploader.component';
@@ -12,6 +12,7 @@ import { AddressListModalComponent } from '../modal/address-list-modal.component
 import { MatDialog } from '@angular/material/dialog';
 import { GeocodingService } from 'src/app/services/geocoding.service';
 import { GeocoderResult } from '@agm/core';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 
 interface ShopFormularFields{
     name: string;
@@ -28,7 +29,7 @@ interface ShopFormularFields{
     templateUrl: './shop-formular.component.html',
     styleUrls:  ['./shop-formular.component.css']
 })
-export class ShopFormularComponent{
+export class ShopFormularComponent implements OnInit{
     formGroup: FormGroup;
     @ViewChild('map') map: MapComponent;
     @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
@@ -36,6 +37,7 @@ export class ShopFormularComponent{
     constructor(
         private tradeService: TradeService,
         private geocoderService: GeocodingService,
+        private geolocationService: GeolocationService,
         
         private formBuilder: FormBuilder,
         private toatrService: ToasterService,
@@ -52,6 +54,14 @@ export class ShopFormularComponent{
             address: null,
             profilePict: null,
         } as ShopFormularFields);
+    }
+
+    ngOnInit(){
+        this.geolocationService.getCurrentPosition(this._updateMapCenterFromPos.bind(this));
+    }
+
+    private _updateMapCenterFromPos(pos: Position){
+        this._updateMapCenter({ lat: pos.coords.latitude, lng:pos.coords.longitude });
     }
 
     get unsubmitable() : boolean{
@@ -109,6 +119,10 @@ export class ShopFormularComponent{
         });
     }
 
+    private _updateMapCenter(loc: {lat: number, lng: number}){
+            this.map.setCenter(loc);
+    }
+
     onSubmit(values: ShopFormularFields){
         let trade: Trade = values;
         this.tradeService.post(
@@ -138,7 +152,7 @@ export class ShopFormularComponent{
         } as Marker);
         this._updateCoordsForm(loc.lat, loc.lng);
         this.ngZone.run(() => {
-            this.map.setCenter(loc);
+            this._updateMapCenter(loc);
         });
     }
 
