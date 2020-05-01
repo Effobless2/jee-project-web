@@ -54,6 +54,17 @@ export class BeerFormularComponent implements OnInit {
     }
   }
 
+  get unsubmitable() : boolean{
+    return Object.values(this.formGroup.value)
+      .some((x: string|number|File) =>
+        x === undefined ||
+        x === null || (
+          typeof(x) === "string" &&
+          (x as string).length === 0
+        )
+      );
+  }
+
   onSubmit(values: BeerFormularFields){
     let beer: Beer = values;
         this.beerService.post(
@@ -61,7 +72,7 @@ export class BeerFormularComponent implements OnInit {
             (id: number) => {
                 beer.id = id;
                 this._showSuccess(beer);
-                
+
             },
             (error: HttpErrorResponse) => {
                 this._showError(beer, error);

@@ -1,5 +1,9 @@
-<div class="component">
-  <h1>Beer formular</h1>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>New beer</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card class="example-card">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
     <mat-form-field>
       <mat-label for="name">Name</mat-label>
@@ -20,12 +24,11 @@
 
     <mat-form-field>
       <mat-label for="description">Description</mat-label>
-      <textarea id="description" matInput formControlName="description"></textarea>
+      <textarea id="description" matInput formControlName="description" rows="3"></textarea>
     </mat-form-field>
 
     <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
-    <p>{{selectFileName}}</p>
 
-    <button mat-raised-button color="primary" type="submit">Purchase</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>Add</button>
   </form>
-</div>
+</mat-card>

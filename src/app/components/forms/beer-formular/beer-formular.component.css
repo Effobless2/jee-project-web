@@ -1,41 +1,33 @@
+mat-toolbar {
+  margin-bottom: 5px;
+}
+
+.example-card {
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1%;
+}
+
 mat-form-field{
-    display: flex;
-    padding: 15pt;
-    justify-content: center;
-}
-
-.component{
-    background-color: white;
-}
-
-h1{
-    text-align: center;
+    padding: 15px;
 }
 
 form{
     display: flex;
     flex-direction: column;
-}
-
-input{
-    text-align: center;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button{
     margin-top: 30px;
     align-self: center;
-    width: fit-content;
+    width: 100px;
 }
 
 file-uploader {
     align-self: center;
-}
-
-.input-file {
-    display: none;
-}
-
-form p{
-    color: #764ebe;
-    text-align: center;
 }
