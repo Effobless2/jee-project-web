@@ -1,15 +1,20 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, NgZone} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import {FileSelectChangeEvent, FileUploaderComponent} from "../../file-uploader/file-uploader.component";
+import { BeerService } from 'src/app/services/api/beer.service';
+import { Beer } from 'src/app/models/Beer';
+import { ToasterService } from 'src/app/services/tools/toaster.service';
+import { ROUTES } from 'src/app/router/routes';
+import { Router } from '@angular/router';
 
 
 interface BeerFormularFields{
   name: string;
-  pic: File;
+  profilePict: File;
   type: string;
   alcoholLevel: number;
-  desc: string;
+  description: string;
 }
 
 @Component({
@@ -27,13 +32,19 @@ export class BeerFormularComponent implements OnInit {
   selectFileName = '';
 
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder, private httpclient: HttpClient){
+  constructor(
+    private formBuilder: FormBuilder,
+    private beerService: BeerService,
+    private ngZone: NgZone,
+    private toasterService: ToasterService,
+    private router: Router
+    ){
       this.formGroup = this.formBuilder.group({
           name: '',
-          pic: null,
+          profilePict: null,
           type: '',
           alcoholLevel: null,
-          desc: '',
+          description: '',
       } as BeerFormularFields);
   }
 
@@ -44,21 +55,39 @@ export class BeerFormularComponent implements OnInit {
   }
 
   onSubmit(values: BeerFormularFields){
-    values.pic = this.selectFile;
-    console.log(values);
-  }
-
-  selectedFile: File
-
-  onFileChanged(event) {
-    this.selectFile = event.target.files[0];
-    this.selectFileName = event.target.files[0].name;
+    let beer: Beer = values;
+        this.beerService.post(
+            beer,
+            (id: number) => {
+                beer.id = id;
+                this._showSuccess(beer);
+                
+            },
+            (error: HttpErrorResponse) => {
+                this._showError(beer, error);
+            });
   }
 
   onFileSelected(_event: FileSelectChangeEvent){
     this.formGroup.patchValue({
-      pic: this.fileUploader.image
+      profilePict: this.fileUploader.image
     });
   }
+
+  private _showError(trade: Beer, error: HttpErrorResponse, message?: string){
+    this.ngZone.run(() => {
+        this.toasterService.error(
+            "Une erreur est survenue !",
+            message ?? error.message
+            );
+    });
+}
+
+private _showSuccess(beer: Beer){
+    this.toasterService.success(
+        `Votre bière ${beer.name} a été créé !`,
+        "Vous pouvez la trouver dans la liste des bières"
+    ).onTap.subscribe(() => this.router.navigate([ROUTES.beers]));
+}
 
 }
