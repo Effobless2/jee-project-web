@@ -1,14 +1,5 @@
-<h4>About</h4>
-<!-- Move this content into the component where user datas will be displayed and where user can connect itself -->
-<button (click)="connectionMethod()" class="loginBtn loginBtn--google">  
-    {{ connectBtnText }}
-</button>
-<div *ngIf="loggedIn">
-    <img src="{{ user.avatarUrl }}">
-    <div>
-        <h4>User name: {{ user.name }}</h4>
-        <p>User email: {{ user.email }}</p>
-        <h4>User id: {{ user.id }}</h4>
-        <h4>Beerer Token: {{ token }}</h4>
-    </div>
-</div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>About</span>
+  </mat-toolbar-row>
+</mat-toolbar>

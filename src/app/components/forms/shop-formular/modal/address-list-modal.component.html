@@ -1,0 +1,6 @@
+<h4>Quelle est l'adresse souhaitée ?</h4>
+<mat-button-toggle-group #group="matButtonToggleGroup" vertical>
+    <mat-button-toggle *ngFor="let val of datas.datas" value="{{val}}" (click)="onClick(val)">
+        {{ val }}
+    </mat-button-toggle>
+</mat-button-toggle-group>

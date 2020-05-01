@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.1.0",
     "@angular/animations": "~9.1.0",
     "@angular/cdk": "^9.2.0",
     "@angular/common": "~9.1.0",
@@ -23,8 +24,10 @@
     "@angular/router": "~9.1.0",
     "@babel/compat-data": "^7.8.0",
     "@ngrx/store": "^9.0.0",
+    "angular-bootstrap-md": "^9.1.0",
     "angularx-social-login": "^2.2.1",
     "jwt-decode": "^2.2.0",
+    "ngx-toastr": "^12.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

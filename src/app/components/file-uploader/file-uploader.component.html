@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-md-12">
+        <mat-label for="file" class="col-md-6">{{ imageName }}</mat-label>
+        <button type="button" class="col-md-5" mat-raised-button (click)="fileInput.click()">Choose File</button>
+        <button mat-raised-button color="warn" class="col-md-1" id="delete" *ngIf="imagePict" (click)="onFileDelete()">X</button>
+        <input hidden #fileInput type="file" accept="image/*" (change)="onFileSelected($event)">
+    </div>
+    <img [src]="imagePict" class="col-md-12" *ngIf="imagePict && previsualization">
+</div>

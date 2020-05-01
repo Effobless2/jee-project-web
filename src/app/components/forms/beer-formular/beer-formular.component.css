@@ -1,0 +1,33 @@
+mat-toolbar {
+  margin-bottom: 5px;
+}
+
+.example-card {
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1%;
+}
+
+mat-form-field{
+    padding: 15px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button{
+    margin-top: 30px;
+    align-self: center;
+    width: 100px;
+}
+
+file-uploader {
+    align-self: center;
+}

@@ -1,7 +1,8 @@
 export interface Beer {
+  id?: number;
   name: string;
-  pic: string;
+  profilePict: string|File;
   type: string;
   alcoholLevel: number;
-  desc: string;
+  description: string;
 }
