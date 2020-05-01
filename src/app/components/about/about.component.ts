@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
     selector: 'page-about',
@@ -6,4 +6,5 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
- }
+
+}

@@ -30,7 +30,7 @@ export class MapComponent{
 
     public get coordinates() : {longitude: number, latitude: number}{
         return {
-            longitude: this.map.longitude, 
+            longitude: this.map.longitude,
             latitude: this.map.latitude
         };
     }

@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './layouts/root/app.component';
 import { MatMenuModule } from '@angular/material/menu'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MDBBootstrapModule, WavesModule  } from 'angular-bootstrap-md'
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MDBBootstrapModule, WavesModule } from 'angular-bootstrap-md'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 //import { MatRadioModule } from '@angular/material/radio'
 //import { MatButtonModule } from '@angular/material/button'
@@ -56,6 +56,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ToasterService } from './services/tools/toaster.service';
 import { GeocodingService } from './services/geocoding.service';
+import { GeolocationService } from "./services/geolocation.service";
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -129,6 +130,7 @@ export function provideConfig() {
     HttpService,
     ToasterService,
     GeocodingService,
+    GeolocationService,
   ],
   bootstrap: [AppComponent]
 })
