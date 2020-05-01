@@ -1,6 +1,6 @@
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpService } from '../tools/http.service';
+import { HttpService, ENC_TYPE_FORM_DATA } from '../tools/http.service';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Beer } from 'src/app/models/Beer';
@@ -27,7 +27,7 @@ export class BeerService{
         });
     }
 
-    get(id: number, subscriber: (beer: Beer) => void, error?: (error: HttpErrorResponse) => void){
+    get(id: number, subscriber: (beer: Beer) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
         return this.httpService.get(`${this.controllerUrl}/${id}`)
         .subscribe({
             next: subscriber,
@@ -35,15 +35,32 @@ export class BeerService{
         });
     }
 
-    post(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void){
+    post(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
+        let file: File = typeof(beer.profilePict) !== "string" ? beer.profilePict : null;
+        beer.profilePict = null;
         return this.httpService.post(this.controllerUrl, beer, this.token)
         .subscribe({
-            next: subscriber,
+            next: (id: number) => {
+                if(file)            
+                   return this._sendImage(id, file as File, subscriber, error);
+                else
+                    subscriber(id);
+            },
             error: error
         });
     }
 
-    put(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void){
+    private _sendImage(id: number, file: File, subscriber: (id: number) => void, error: (error: HttpErrorResponse) => void) : Subscription {
+        let fd: FormData = new FormData();
+        fd.set("file", file);
+        return this.httpService.patch(`${this.controllerUrl}/image/${id}`, fd, this.token, ENC_TYPE_FORM_DATA)
+            .subscribe({
+                next: subscriber,
+                error: error
+            });
+    }
+
+    put(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
         return this.httpService.put(this.controllerUrl, beer, this.token)
         .subscribe({
             next: subscriber,
@@ -51,7 +68,7 @@ export class BeerService{
         });
     }
 
-    delete(id: number, subscriber: (result: null) => void, error?: (error: HttpErrorResponse) => void){
+    delete(id: number, subscriber: (result: null) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
         return this.httpService.delete(`${this.controllerUrl}/${id}`, this.token)
         .subscribe({
             next: subscriber,

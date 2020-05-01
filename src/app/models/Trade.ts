@@ -5,6 +5,6 @@ export interface Trade{
     longitude: number,
     lattitude: number,
     address: string;
-    profilepic?: string|File;
+    profilePict?: string|File;
     description: string;
 }

@@ -1,13 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MapComponent, MapOnClickEvent, Marker } from '../../map/map.component';
-import { FileUploaderComponent, FileSelectChangeEvent } from '../../file-uploader/file-uploader.component';
+import { MapComponent, MapOnClickEvent, Marker } from '../../../map/map.component';
+import { FileUploaderComponent, FileSelectChangeEvent } from '../../../file-uploader/file-uploader.component';
 import { Trade } from 'src/app/models/Trade';
 import { TradeService } from 'src/app/services/api/trade.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToasterService } from 'src/app/services/tools/toaster.service';
 import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/router/routes';
+import { AddressListModalComponent } from '../modal/address-list-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { GeocodingService } from 'src/app/services/geocoding.service';
+import { GeocoderResult } from '@agm/core';
 
 interface ShopFormularFields{
     name: string;
@@ -16,7 +20,7 @@ interface ShopFormularFields{
     lattitude: number;
     type: string;
     address: string;
-    profilepic: string|File;
+    profilePict: string|File;
 }
 
 @Component({
@@ -31,10 +35,13 @@ export class ShopFormularComponent{
 
     constructor(
         private tradeService: TradeService,
+        private geocoderService: GeocodingService,
         
         private formBuilder: FormBuilder,
         private toatrService: ToasterService,
         private router: Router,
+        private dialog: MatDialog,
+        private ngZone: NgZone
     ){
         this.formGroup = this.formBuilder.group({
             name: null,
@@ -43,7 +50,7 @@ export class ShopFormularComponent{
             lattitude: null,
             type: null,
             address: null,
-            profilepic: null,
+            profilePict: null,
         } as ShopFormularFields);
     }
 
@@ -58,6 +65,11 @@ export class ShopFormularComponent{
             );
     }
 
+    get locationUnsearchable(): boolean{
+        let address: string = (this.formGroup.value as ShopFormularFields).address;
+        return !address || address.length === 0;
+    }
+
     mapOnClick(event: MapOnClickEvent){
         this.map.clearMarkers();
         this.map.addMarker({
@@ -65,7 +77,12 @@ export class ShopFormularComponent{
             lng: event.coords.lng,
             label: "ICI"
         } as Marker);
+        this.ngZone.run(() => {
+            this.map.setCenter(event.coords);
+        });
         this._updateCoordsForm(event.coords.lat, event.coords.lng);
+        this.geocoderService.findLocation(event.coords, this._openDialog.bind(this),
+        _ => this._showError(null, null, "Adresse introvable"));
     }
 
     markerOnClick(_marker: Marker, index: number){
@@ -75,16 +92,20 @@ export class ShopFormularComponent{
 
     onFileSelected(_event: FileSelectChangeEvent){
         this.formGroup.patchValue({
-            profilepic: this.fileUploader.image
+            profilePict: this.fileUploader.image
         });
     }
 
     private _updateCoordsForm(lattitude: number, longitude: number){
         this.formGroup.patchValue({
-            lattitude: lattitude
-        });
-        this.formGroup.patchValue({
+            lattitude: lattitude,
             longitude: longitude
+        });
+    }
+
+    private _updateAddress(value: string){
+        this.formGroup.patchValue({
+            address: value
         });
     }
 
@@ -102,11 +123,32 @@ export class ShopFormularComponent{
             });
     }
 
-    private _showError(trade: Trade, error: HttpErrorResponse){
-        this.toatrService.error(
-            "Une erreur est survenue !",
-            error.message
-        );
+    searchLocation(){
+        let address: string = (this.formGroup.value as ShopFormularFields).address;
+        this.geocoderService.findLocation(address, this._addMarker.bind(this), () => this._showError(null, null, "Location not found"));
+    }
+
+    private _addMarker(locations: GeocoderResult[]) {
+        this.map.clearMarkers();
+        let loc = {lat: locations[0].geometry.location.lat(), lng:locations[0].geometry.location.lng() };
+        this.map.addMarker({
+            lat: loc.lat,
+            lng: loc.lng,
+            label: "ICI"
+        } as Marker);
+        this._updateCoordsForm(loc.lat, loc.lng);
+        this.ngZone.run(() => {
+            this.map.setCenter(loc);
+        });
+    }
+
+    private _showError(trade: Trade, error: HttpErrorResponse, message?: string){
+        this.ngZone.run(() => {
+            this.toatrService.error(
+                "Une erreur est survenue !",
+                message ?? error.message
+                );
+        });
     }
 
     private _showSuccess(trade: Trade){
@@ -114,5 +156,16 @@ export class ShopFormularComponent{
             `Votre commerce ${trade.name} a été créé !`,
             "Vous pourrez y accéder à tout moment depuis votre profil"
         ).onTap.subscribe(() => this.router.navigate([ROUTES.shops]));
+    }
+
+    private _openDialog(values: GeocoderResult[]): void {
+        this.ngZone.run(() => 
+            this.dialog.open(AddressListModalComponent, {
+                data: {
+                    datas: values.map((x: GeocoderResult) => x.formatted_address),
+                    provider: this._updateAddress.bind(this)
+                }
+            })
+        );
     }
 }

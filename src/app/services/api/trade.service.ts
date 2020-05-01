@@ -34,8 +34,8 @@ export class TradeService{
     }
 
     post(shop: Trade, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
-        var file: File|string = shop.profilepic;
-        shop.profilepic = null;
+        var file: File|string = shop.profilePict;
+        shop.profilePict = null;
         return this.httpService.post(this.controllerUrl, shop, this.token)
         .subscribe({
             next: (id: number) => {

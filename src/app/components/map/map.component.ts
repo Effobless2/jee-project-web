@@ -24,9 +24,13 @@ export interface MapOnClickEvent{
 export class MapComponent{
     @Input() onClickedMapEvent: (event :MapOnClickEvent) => any = () => {};
     @Input() onClickedMarkerEvent: (marker: Marker, index: number) => any = () => {};
+    @Input() latitude: number = 0;
+    @Input() longitude: number = 0;
+
 
     @ViewChild('map') map: AgmMap;
     public markers: Marker[] = [];
+
 
     public get coordinates() : {longitude: number, latitude: number}{
         return {
@@ -46,5 +50,10 @@ export class MapComponent{
 
     public clearMarkers() {
         this.markers = [];
+    }
+
+    public setCenter(location: {lat: number, lng: number}){
+        this.latitude = Number(location.lat);
+        this.longitude = Number(location.lng);
     }
 }
