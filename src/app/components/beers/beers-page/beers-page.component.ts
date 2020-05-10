@@ -13,14 +13,18 @@ export class BeersPageComponent {
 
   constructor(
     private beerService: BeerService) {
-    this.beerService.getAll(
-      this.fullFillBeers.bind(this),
-      (error: HttpErrorResponse) => console.error(error)
-    );
+    this.loadFromServer();
   }
 
   fullFillBeers(beers: Beer[]) {
     this.beers = beers;
+  }
+
+  loadFromServer(){
+    this.beerService.getAll(
+      this.fullFillBeers.bind(this),
+      (error: HttpErrorResponse) => console.error(error)
+    );
   }
 
 }

@@ -1,4 +1,4 @@
 <div>
-    <beer-search-bar [callback]="fullFillBeers.bind(this)"></beer-search-bar>
+    <beer-search-bar [callback]="fullFillBeers.bind(this)" [rollback]="loadFromServer.bind(this)"></beer-search-bar>
     <beers-list [beers]=beers></beers-list>
 </div>

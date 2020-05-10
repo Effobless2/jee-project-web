@@ -30,7 +30,8 @@ function multipleCheckboxRequireOne(fa: FormArray) {
     styleUrls: ['beer-search-bar.component.css']
 })
 export class BeerSearchBarComponent {
-    @Input('callback') callback: (beers: Beer[]) => any = (_) => { }
+    @Input('callback') callback: (beers: Beer[]) => any = (_) => { };
+    @Input('rollback') rollback: () => any = () => {};
     formGroup: FormGroup;
     beerTypesForm: FormArray;
     beerTypes: string[] = beerTypes;
