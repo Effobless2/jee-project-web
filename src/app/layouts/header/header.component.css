@@ -14,3 +14,6 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+mat-toolbar {
+  margin-bottom: 5px;
+}

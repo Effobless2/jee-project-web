@@ -1,7 +1,7 @@
 export const ROUTES = {
     root: '',
-    beers: 'beers-list',
-    shops: 'shops-list',
+    beers: 'beers',
+    shops: 'shops',
     about: 'about',
     beerForm: 'beer-form',
     shopForm: 'shop-form'

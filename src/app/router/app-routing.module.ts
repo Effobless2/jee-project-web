@@ -7,13 +7,14 @@ import { ShopsListComponent } from "../components/shops/shops-list/shops-list.co
 import { ROUTES } from './routes';
 import { BeerFormularComponent } from '../components/forms/beer-formular/beer-formular.component';
 import { ShopFormularComponent } from '../components/forms/shop-formular/formular/shop-formular.component';
+import { BeersPageComponent } from '../components/beers/beers-page/beers-page.component';
 
 
 const routes: Routes = [
     //{ path: '', redirectTo: '/departments', pathMatch: 'full' },
   { path: ROUTES.root, component: HomeComponent },
   { path: ROUTES.about, component: AboutComponent },
-  { path: ROUTES.beers, component: BeersListComponent },
+  { path: ROUTES.beers, component: BeersPageComponent },
   { path: ROUTES.shops, component: ShopsListComponent },
   { path: ROUTES.beerForm, component: BeerFormularComponent },
   { path: ROUTES.shopForm, component: ShopFormularComponent },

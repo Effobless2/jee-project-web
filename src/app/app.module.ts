@@ -59,6 +59,7 @@ import { GeocodingService } from './services/geocoding.service';
 import { GeolocationService } from "./services/geolocation.service";
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddressListModalComponent } from './components/forms/shop-formular/modal/address-list-modal.component';
+import { BeersPageComponent } from './components/beers/beers-page/beers-page.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -92,7 +93,8 @@ export function provideConfig() {
     AddressListModalComponent,
     BeerFormularComponent,
     MapComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    BeersPageComponent
   ],
   imports: [
     SocialLoginModule,

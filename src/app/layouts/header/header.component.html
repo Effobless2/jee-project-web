@@ -1,12 +1,12 @@
 <div class="header">
     <nav class="mat-tab-nav-bar">
       <div class="tabs">
-        <a routerLink="/"><img class="logo" src="../../../assets/beerer_logo2.png" alt="Beerer's logo"></a>
-        <button mat-button routerLink="/about">About</button>
-        <button mat-button routerLink="/beers-list">Beers list</button>
-        <button mat-button routerLink="/shops-list">Shops list</button>
-        <button mat-button routerLink="/beer-form">New Beer</button>
-        <button mat-button routerLink="/shop-form">New Shop</button>
+        <a routerLink="/"><img class="logo" src="../../../assets/beerer_logo2.png" alt="Beerer's logo" (click)="onClick('')"></a>
+        <button mat-button routerLink="/about" (click)="onClick('About')">About</button>
+        <button mat-button routerLink="/beers" (click)="onClick('Beers')">Beers list</button>
+        <button mat-button routerLink="/shops" (click)="onClick('Shops')">Shops list</button>
+        <button mat-button routerLink="/beer-form" (click)="onClick('New Beer')">New Beer</button>
+        <button mat-button routerLink="/shop-form" (click)="onClick('New Shop')">New Shop</button>
       </div>
       <div class="tools">
         <button mat-icon-button color="primary">
@@ -16,3 +16,8 @@
       </div>
     </nav>
 </div>
+<mat-toolbar color="primary" *ngIf="title">
+  <mat-toolbar-row>
+    <span>{{ title }}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
