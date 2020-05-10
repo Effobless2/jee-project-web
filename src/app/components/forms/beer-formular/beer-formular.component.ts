@@ -7,6 +7,7 @@ import { Beer } from 'src/app/models/Beer';
 import { ToasterService } from 'src/app/services/tools/toaster.service';
 import { ROUTES } from 'src/app/router/routes';
 import { Router } from '@angular/router';
+import { beerTypes } from 'src/app/services/tools/beer.types';
 
 
 interface BeerFormularFields{
@@ -26,7 +27,7 @@ export class BeerFormularComponent implements OnInit {
 
   @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
   alcoholLevels = [];
-  types = ["Blonde", "Brune", "Rousse", "Chatain", "Chauve"];
+  types: string[] = beerTypes;
   imageSrc: any = '';
   selectFile = null;
   selectFileName = '';

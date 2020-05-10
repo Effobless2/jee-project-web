@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 //import { MatButtonModule } from '@angular/material/button'
-//import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatInputModule } from '@angular/material/input'
 //import { MatSelectModule } from '@angular/material/select'
 //import { MatDatepickerModule } from '@angular/material/datepicker'
@@ -62,6 +62,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddressListModalComponent } from './components/forms/shop-formular/modal/address-list-modal.component';
 import { BeersPageComponent } from './components/beers/beers-page/beers-page.component';
 import { AppState } from './store/app.state';
+import { BeerSearchService } from './services/api/beerSearch.service';
+import { BeerSearchBarComponent } from './components/forms/beer-search-bar/beer-search-bar.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -105,7 +107,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     BeerFormularComponent,
     MapComponent,
     FileUploaderComponent,
-    BeersPageComponent
+    BeersPageComponent,
+    BeerSearchBarComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -119,6 +122,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     MatProgressBarModule,
     MatCardModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatSelectModule,
     MatMenuModule,
@@ -149,6 +153,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ToasterService,
     GeocodingService,
     GeolocationService,
+    BeerSearchService,
   ],
   bootstrap: [AppComponent]
 })
