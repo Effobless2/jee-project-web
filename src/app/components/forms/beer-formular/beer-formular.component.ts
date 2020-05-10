@@ -98,7 +98,7 @@ private _showSuccess(beer: Beer){
     this.toasterService.success(
         `Votre bière ${beer.name} a été créé !`,
         "Vous pouvez la trouver dans la liste des bières"
-    ).onTap.subscribe(() => this.router.navigate([ROUTES.beers]));
+    ).onTap.subscribe(() => this.router.navigate([ROUTES.beers.path]));
 }
 
 }
