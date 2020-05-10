@@ -1,3 +1,23 @@
-mat-form-field{
+mat-form-field, mat-label, div{
     padding-left: 15pt;
+}
+
+mat-checkbox {
+    min-width: 100pt;
+    display: flex;
+}
+
+#checkboxes {
+    display: inline-grid;
+    position: relative;
+}
+
+div:not(#checkboxes){
+    width: 100%;
+    background-color: white;
+    margin-bottom: 10pt
+}
+
+form{
+    text-align: center;
 }
