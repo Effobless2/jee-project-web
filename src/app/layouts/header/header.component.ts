@@ -13,7 +13,6 @@ export class HeaderComponent {
     title: string;
     
     constructor(private router: Router, private location: Location){
-        console.log(this.routes);
         this.router.events.subscribe((_) => {
             Object.values(ROUTES).map((route: URLDatas) => {
                 if(route.path === this.location.path().slice(1))
