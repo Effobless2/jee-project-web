@@ -27,6 +27,7 @@
     "angular-bootstrap-md": "^9.1.0",
     "angularx-social-login": "^2.2.1",
     "jwt-decode": "^2.2.0",
+    "ngrx-store-localstorage": "^9.0.0",
     "ngx-toastr": "^12.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
