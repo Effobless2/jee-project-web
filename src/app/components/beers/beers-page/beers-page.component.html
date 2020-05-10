@@ -1,2 +1,9 @@
-<h1>Hello</h1>
+<form class="searchForm" [formGroup]="formGroup">
+    <mat-form-field class="example-full-width">
+        <input type="text" matInput placeholder="Search a beer" formControlName="name">
+        <button matSuffix mat-button (click)="onSearch()" [disabled]="disabled">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
 <beers-list [beers]=beers></beers-list>
