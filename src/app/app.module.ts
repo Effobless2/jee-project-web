@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 //import { MatButtonModule } from '@angular/material/button'
-//import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatInputModule } from '@angular/material/input'
 //import { MatSelectModule } from '@angular/material/select'
 //import { MatDatepickerModule } from '@angular/material/datepicker'
@@ -33,7 +33,8 @@ import { ConnectionBtnComponent } from './components/connection-button/connectio
 import { AppRoutingModule } from './router/app-routing.module';
 import { environment } from 'src/environments/environment';
 
-import { StoreModule } from '@ngrx/store'
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store'
+import { localStorageSync } from 'ngrx-store-localstorage';
 import { userReducer } from './store/reducers/user.reducer';
 import { tokenReducer } from './store/reducers/token.reducer';
 import { AuthenticationService } from './services/authentication.service';
@@ -59,6 +60,10 @@ import { GeocodingService } from './services/geocoding.service';
 import { GeolocationService } from "./services/geolocation.service";
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddressListModalComponent } from './components/forms/shop-formular/modal/address-list-modal.component';
+import { BeersPageComponent } from './components/beers/beers-page/beers-page.component';
+import { AppState } from './store/app.state';
+import { BeerSearchService } from './services/api/beerSearch.service';
+import { BeerSearchBarComponent } from './components/forms/beer-search-bar/beer-search-bar.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -74,6 +79,15 @@ let config = new AuthServiceConfig([
 export function provideConfig() {
   return config;
 }
+
+const reducers: ActionReducerMap<AppState> = {
+  user: userReducer,
+  token: tokenReducer
+};
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['user', 'token'], rehydrate: true})(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 
 @NgModule({
@@ -92,20 +106,23 @@ export function provideConfig() {
     AddressListModalComponent,
     BeerFormularComponent,
     MapComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    BeersPageComponent,
+    BeerSearchBarComponent,
   ],
   imports: [
     SocialLoginModule,
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot({
-      user: userReducer,
-      token: tokenReducer
-    }),
+    StoreModule.forRoot(
+      reducers,
+      {metaReducers}
+    ),
     AppRoutingModule,
     MatProgressBarModule,
     MatCardModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatSelectModule,
     MatMenuModule,
@@ -136,6 +153,7 @@ export function provideConfig() {
     ToasterService,
     GeocodingService,
     GeolocationService,
+    BeerSearchService,
   ],
   bootstrap: [AppComponent]
 })

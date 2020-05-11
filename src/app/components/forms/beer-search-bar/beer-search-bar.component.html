@@ -1,0 +1,26 @@
+<div>
+    <form class="searchForm" [formGroup]="formGroup" (ngSubmit)=onSearch() class="row">
+        <mat-form-field class="example-full-width">
+            <input type="text" matInput placeholder="Search a beer" formControlName="name">
+        </mat-form-field>
+
+        <mat-label for="checkboxes">Types : </mat-label>
+        <div id="checkboxes" formArrayName="types" class="col-md-3">
+            <mat-checkbox *ngFor="let type of beerTypesForm.controls; let i = index"
+                [formControlName]="i">
+                {{ beerTypes[i] }}
+            </mat-checkbox>
+        </div>
+
+        <mat-form-field class="example-full-width">
+            <input type="number" matInput placeholder="Search a beer" formControlName="alcoholLevel">
+        </mat-form-field>
+
+        <button matSuffix mat-button type="submit" [disabled]="disabled">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button matSuffix mat-button type='button' (click)="rollback()">
+            <mat-icon>cached</mat-icon>
+        </button>
+    </form>
+</div>

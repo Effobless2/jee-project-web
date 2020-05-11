@@ -169,7 +169,7 @@ export class ShopFormularComponent implements OnInit{
         this.toatrService.success(
             `Votre commerce ${trade.name} a été créé !`,
             "Vous pourrez y accéder à tout moment depuis votre profil"
-        ).onTap.subscribe(() => this.router.navigate([ROUTES.shops]));
+        ).onTap.subscribe(() => this.router.navigate([ROUTES.shops.path]));
     }
 
     private _openDialog(values: GeocoderResult[]): void {
