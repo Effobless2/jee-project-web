@@ -64,6 +64,9 @@ import { BeersPageComponent } from './components/beers/beers-page/beers-page.com
 import { AppState } from './store/app.state';
 import { BeerSearchService } from './services/api/beerSearch.service';
 import { BeerSearchBarComponent } from './components/forms/beer-search-bar/beer-search-bar.component';
+import { ShopSearchBarComponent } from './components/forms/shop-search-bar/shop-search-bar.component';
+import { ShopsPageComponent } from './components/shops/shops-page/shops-page.component';
+import {TradeSearchService} from "./services/api/tradeSearch.service";
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -109,6 +112,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FileUploaderComponent,
     BeersPageComponent,
     BeerSearchBarComponent,
+    ShopSearchBarComponent,
+    ShopsPageComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -154,6 +159,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     GeocodingService,
     GeolocationService,
     BeerSearchService,
+    TradeSearchService
   ],
   bootstrap: [AppComponent]
 })

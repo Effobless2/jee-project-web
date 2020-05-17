@@ -1,4 +1,4 @@
-@import url( 'https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
 
 html, body, app-root {
   height: 100%;
@@ -6,7 +6,7 @@ html, body, app-root {
 }
 
 body{
-  background-image: url('/assets/pattern.svg');
-  margin: 0px;
-  padding: 0px;
+  background-image: url('/assets/pattern2.svg');
+  margin: 0;
+  padding: 0;
 }

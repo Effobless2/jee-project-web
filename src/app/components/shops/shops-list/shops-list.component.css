@@ -1,0 +1,11 @@
+shops-card {
+  display: inline-flex;
+  width: 30%;
+  justify-content: center;
+}
+
+.list {
+  width: 100%;
+  margin:auto;
+  text-align:center;
+}
