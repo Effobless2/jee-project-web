@@ -64,6 +64,7 @@ import { BeersPageComponent } from './components/beers/beers-page/beers-page.com
 import { AppState } from './store/app.state';
 import { BeerSearchService } from './services/api/beerSearch.service';
 import { BeerSearchBarComponent } from './components/forms/beer-search-bar/beer-search-bar.component';
+import { DialogDataExampleDialog } from './components/shop-edit-dialog/shop-edit-dialog';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -109,6 +110,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FileUploaderComponent,
     BeersPageComponent,
     BeerSearchBarComponent,
+    DialogDataExampleDialog,
   ],
   imports: [
     SocialLoginModule,

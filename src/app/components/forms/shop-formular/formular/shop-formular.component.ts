@@ -1,4 +1,4 @@
-import { Component, ViewChild, NgZone, OnInit } from '@angular/core';
+import { Component, ViewChild, NgZone, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapComponent, MapOnClickEvent, Marker } from '../../../map/map.component';
 import { FileUploaderComponent, FileSelectChangeEvent } from '../../../file-uploader/file-uploader.component';
@@ -15,6 +15,7 @@ import { GeocoderResult } from '@agm/core';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 
 interface ShopFormularFields{
+    id?: number;
     name: string;
     description: string;
     longitude: number;
@@ -30,6 +31,8 @@ interface ShopFormularFields{
     styleUrls:  ['./shop-formular.component.css']
 })
 export class ShopFormularComponent implements OnInit{
+    @Input('trade') trade: Trade = null;
+
     formGroup: FormGroup;
     @ViewChild('map') map: MapComponent;
     @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
@@ -57,7 +60,20 @@ export class ShopFormularComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.geolocationService.getCurrentPosition(this._updateMapCenterFromPos.bind(this));
+        if(this.trade){
+            this.formGroup = this.formBuilder.group(this.trade as ShopFormularFields);
+            setTimeout(_ => {
+                this.map.addMarker({
+                    lat: this.trade.lattitude,
+                    lng: this.trade.longitude,
+                    label: "ICI"
+                } as Marker);
+                this._updateMapCenter({lat: this.trade.lattitude, lng: this.trade.longitude});
+                this.fileUploader.imagePict = this.trade.profilePict as string;
+            },0);
+        }
+        else
+            this.geolocationService.getCurrentPosition(this._updateMapCenterFromPos.bind(this));
     }
 
     private _updateMapCenterFromPos(pos: Position){
@@ -66,13 +82,24 @@ export class ShopFormularComponent implements OnInit{
 
     get unsubmitable() : boolean{
         return Object.values(this.formGroup.value)
-            .some((x: string|number|File) => 
-                x === undefined || 
-                x === null || (
-                    typeof(x) === "string" &&
-                    (x as string).length === 0
+            .some((x: string|number|File) => {
+                return x === undefined || 
+                    x === null || (
+                        typeof(x) === "string" &&
+                        (x as string).length === 0
+                    )
+            }
+        ) || (
+            this.trade !== null &&
+            Object.keys(this.formGroup.value)
+                .every((key: string) => 
+                    this.formGroup.value[key] === this.trade[key]
                 )
-            );
+        );
+    }
+
+    get submitButtonLabel() : string{
+        return this.trade === null ? "Create" : "Update";
     }
 
     get locationUnsearchable(): boolean{
@@ -120,21 +147,31 @@ export class ShopFormularComponent implements OnInit{
     }
 
     private _updateMapCenter(loc: {lat: number, lng: number}){
-            this.map.setCenter(loc);
+        this.map.setCenter(loc);
     }
 
     onSubmit(values: ShopFormularFields){
         let trade: Trade = values;
-        this.tradeService.post(
-            trade,
-            (id: number) => {
-                trade.id = id;
-                this._showSuccess(trade);
-                
-            },
-            (error: HttpErrorResponse) => {
-                this._showError(trade, error);
-            });
+        if(this.trade === null)
+            this.tradeService.post(
+                trade,
+                (id: number) => {
+                    trade.id = id;
+                    this._showSuccess(trade);
+                },
+                (error: HttpErrorResponse) => {
+                    this._showError(trade, error);
+                });
+        else
+            this.tradeService.put(
+                trade,
+                (id: number) => {
+                    trade.id = id;
+                    this._showSuccess(trade);
+                },
+                (error: HttpErrorResponse) => {
+                    this._showError(trade, error);
+                });
     }
 
     searchLocation(){

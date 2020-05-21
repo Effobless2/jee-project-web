@@ -25,7 +25,7 @@
                 (click)="searchLocation()">Search
         </button>
       </div>
-      <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>Add your shop</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>{{ submitButtonLabel }}</button>
     </div>
     <div>
       <map #map [onClickedMapEvent]="mapOnClick.bind(this)"
