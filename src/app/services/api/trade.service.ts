@@ -49,9 +49,17 @@ export class TradeService{
     }
 
     put(shop: Trade, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
-        return this.httpService.put(this.controllerUrl, shop, this.token)
+        var file: File|string = shop.profilePict;
+        if(typeof(shop.profilePict) !== "string")
+            shop.profilePict = null;
+        return this.httpService.put(`${this.controllerUrl}/${shop.id}`, shop, this.token)
         .subscribe({
-            next: subscriber,
+            next: (id: number) => {
+                if(file && typeof(file) !== "string")
+                    return this._sendImage(shop.id, file as File, subscriber, error);
+                else
+                    subscriber(id);
+            },
             error: error
         });
     }
