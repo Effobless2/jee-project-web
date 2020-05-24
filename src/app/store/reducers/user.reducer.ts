@@ -3,10 +3,9 @@ import { User } from 'src/app/models/User';
 
 const initialUser: User = null;
 
-export function userReducer(state: User = initialUser, action: UserActions.Actions) : User {
-
+export function userReducer(state: User = initialUser, action: UserActions.Actions): User {
     let result = state;
-    switch(action.type){
+    switch (action.type) {
         case UserActions.CONNECT_USER :
             result = action.user;
             break;

@@ -1,9 +1,9 @@
-export interface Trade{
+export interface Trade {
     id?: number;
     name: string;
     type: string;
-    longitude: number,
-    lattitude: number,
+    longitude: number;
+    lattitude: number;
     address: string;
     profilePict?: string|File;
     description: string;

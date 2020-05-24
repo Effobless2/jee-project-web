@@ -1,4 +1,4 @@
-import { AuthService, SocialUser, GoogleLoginProvider } from "angularx-social-login";
+import { AuthService, SocialUser, GoogleLoginProvider } from 'angularx-social-login';
 import { DisconnectUser, ConnectUser } from '../store/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
@@ -14,13 +14,13 @@ export class AuthenticationService {
         private authService: AuthService,
         private store: Store<AppState>,
         private userService: UserService
-    ){}
+    ) {}
 
-    async signIn(){
-        let newUser: SocialUser = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-        this.userService.auth(newUser.idToken, (data: {token:string}) => {
-            let decoded: any = jwt_decode(data.token);
-            let newUser: User = {
+    async signIn() {
+        const user: SocialUser = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+        this.userService.auth(user.idToken, (data: {token: string}) => {
+            const decoded: any = jwt_decode(data.token);
+            const newUser: User = {
                 id: decoded.id,
                 name: decoded.name,
                 email: decoded.email,
@@ -31,7 +31,7 @@ export class AuthenticationService {
         });
     }
 
-    async signOut(){
+    async signOut() {
         await this.authService.signOut();
         this.store.dispatch(new DisconnectUser());
         this.store.dispatch(new DisableToken());

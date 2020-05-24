@@ -22,7 +22,7 @@
       <textarea id="description" matInput formControlName="description" rows="3"></textarea>
     </mat-form-field>
 
-    <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
+    <app-file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></app-file-uploader>
 
     <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>{{ submitButtonLabel }}</button>
   </form>

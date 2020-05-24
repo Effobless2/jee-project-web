@@ -1,36 +1,36 @@
-<mat-card class="example-card">
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-    <div class="fields">
+<mat-card class='example-card'>
+  <form [formGroup]='formGroup' (ngSubmit)='onSubmit(formGroup.value)'>
+    <div class='fields'>
       <mat-form-field>
-        <mat-label for="name">Name</mat-label>
-        <input matInput id="name" type="text" formControlName="name">
+        <mat-label for='name'>Name</mat-label>
+        <input matInput id='name' type='text' formControlName='name'>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label for="type">Type</mat-label>
-        <input matInput type="text" id="type" formControlName="type">
+        <mat-label for='type'>Type</mat-label>
+        <input matInput type='text' id='type' formControlName='type'>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label for="description">Description</mat-label>
-        <textarea id="description" matInput formControlName="description" rows="3"></textarea>
+        <mat-label for='description'>Description</mat-label>
+        <textarea id='description' matInput formControlName='description' rows='3'></textarea>
       </mat-form-field>
 
-      <div class="address">
+      <div class='address'>
         <mat-form-field>
-          <mat-label for="address">Adresse</mat-label>
-          <input matInput type="text" id="address" formControlName="address">
+          <mat-label for='address'>Adresse</mat-label>
+          <input matInput type='text' id='address' formControlName='address'>
         </mat-form-field>
         <button mat-raised-button type='button' [disabled]='locationUnsearchable'
-                (click)="searchLocation()">Search
+                (click)='searchLocation()'>Search
         </button>
       </div>
-      <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>{{ submitButtonLabel }}</button>
+      <button mat-raised-button color='primary' type='submit' [disabled]='unsubmitable'>{{ submitButtonLabel }}</button>
     </div>
     <div>
-      <map #map [onClickedMapEvent]="mapOnClick.bind(this)"
-           [onClickedMarkerEvent]="markerOnClick.bind(this)"></map>
-      <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
+      <app-map #map [onClickedMapEvent]='mapOnClick.bind(this)'
+           [onClickedMarkerEvent]='markerOnClick.bind(this)'></app-map>
+      <app-file-uploader #fileUploader [subscriber]='onFileSelected.bind(this)'></app-file-uploader>
     </div>
 
   </form>
