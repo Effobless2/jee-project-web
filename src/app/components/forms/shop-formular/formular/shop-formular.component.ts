@@ -204,7 +204,7 @@ export class ShopFormularComponent implements OnInit{
 
     private _showSuccess(trade: Trade){
         this.toatrService.success(
-            `Votre commerce ${trade.name} a été créé !`,
+            `Votre commerce ${trade.name} a été ${ this.trade ? "mis à jour" : "créé" } !`,
             "Vous pourrez y accéder à tout moment depuis votre profil"
         ).onTap.subscribe(() => this.router.navigate([ROUTES.shops.path]));
     }

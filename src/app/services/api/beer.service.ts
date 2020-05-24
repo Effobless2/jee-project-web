@@ -61,9 +61,17 @@ export class BeerService{
     }
 
     put(beer: Beer, subscriber: (id: number) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
-        return this.httpService.put(this.controllerUrl, beer, this.token)
+        var file: File|string = beer.profilePict;
+        if(typeof(beer.profilePict) !== "string")
+            beer.profilePict = null;
+        return this.httpService.put(`${this.controllerUrl}/${beer.id}`, beer, this.token)
         .subscribe({
-            next: subscriber,
+            next: (id: number) => {
+                if(file && typeof(file) !== "string")
+                    return this._sendImage(beer.id, file as File, subscriber, error);
+                else
+                    subscriber(id);
+            },
             error: error
         });
     }

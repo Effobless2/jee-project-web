@@ -3,10 +3,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Trade } from 'src/app/models/Trade';
 
 @Component({
-    selector: 'dialog-data-example-dialog',
+    selector: 'shop-edit-dialog',
     templateUrl: 'shop-edit-dialog.html',
     styleUrls: ['shop-edit-dialog.css']
 })
-export class DialogDataExampleDialog {
+export class ShopEditDialog {
     constructor(@Inject(MAT_DIALOG_DATA) public data: Trade) {}
 }
