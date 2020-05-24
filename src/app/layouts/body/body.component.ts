@@ -1,10 +1,9 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'page-body',
+    selector: 'app-page-body',
     templateUrl: './body.component.html',
     styleUrls: ['./body.component.css']
 })
-export class BodyComponent{
-    
+export class BodyComponent {
 }

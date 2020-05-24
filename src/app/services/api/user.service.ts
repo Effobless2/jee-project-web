@@ -6,29 +6,32 @@ import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
-export class UserService{
-    private controllerUrl: string = `${environment.beererApiUrl}users`;
+export class UserService {
+    private controllerUrl = `${environment.beererApiUrl}users`;
 
-    constructor(private http: HttpService){}
+    constructor(private http: HttpService) {}
 
-    auth(googleToken: string, subscriber: ({token: string}) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
+    auth(googleToken: string,
+         subscriber: (datas: {token: string}) => void,
+         error?: (error: HttpErrorResponse) => void): Subscription {
         return this.http.post(
             `${this.controllerUrl}/auth`,
             googleToken
         )
         .subscribe({
             next: subscriber,
-            error: error
+            error
         });
     }
 
-    getAll(subscriber: (users: User[]) => void, error?: (error: HttpErrorResponse) => void) : Subscription{
+    getAll(subscriber: (users: User[]) => void,
+           error?: (error: HttpErrorResponse) => void): Subscription {
         return this.http.get(
             `${this.controllerUrl}`
         )
         .subscribe({
             next: subscriber,
-            error: error
+            error
         });
     }
 }

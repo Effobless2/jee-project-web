@@ -2,28 +2,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './layouts/root/app.component';
-import { MatMenuModule } from '@angular/material/menu'
+import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MDBBootstrapModule, WavesModule } from 'angular-bootstrap-md'
+import { MDBBootstrapModule, WavesModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-//import { MatButtonModule } from '@angular/material/button'
-import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatInputModule } from '@angular/material/input'
-//import { MatSelectModule } from '@angular/material/select'
-//import { MatDatepickerModule } from '@angular/material/datepicker'
-//import { MatNativeDateModule } from '@angular/material/core'
-//import { MatCardModule } from '@angular/material/card'
-//import { MatToolbarModule } from '@angular/material/toolbar'
-//import { MatFormFieldModule } from '@angular/material/form-field'
-//import { MatSnackBarModule } from '@angular/material/snack-bar'
-//import { MatDialogModule } from '@angular/material/dialog'
+// import { MatButtonModule } from '@angular/material/button'
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+// import { MatSelectModule } from '@angular/material/select'
+// import { MatDatepickerModule } from '@angular/material/datepicker'
+// import { MatNativeDateModule } from '@angular/material/core'
+// import { MatCardModule } from '@angular/material/card'
+// import { MatToolbarModule } from '@angular/material/toolbar'
+// import { MatFormFieldModule } from '@angular/material/form-field'
+// import { MatSnackBarModule } from '@angular/material/snack-bar'
+// import { MatDialogModule } from '@angular/material/dialog'
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrModule } from 'ngx-toastr';
 
-import { SocialLoginModule, AuthServiceConfig, LoginOpt } from "angularx-social-login";
-import { GoogleLoginProvider } from "angularx-social-login";
+import { SocialLoginModule, AuthServiceConfig, LoginOpt } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 import { HeaderComponent } from './layouts/header/header.component';
 import { BodyComponent } from './layouts/body/body.component';
 import { HomeComponent } from './components/home/home.component';
@@ -33,20 +33,20 @@ import { ConnectionBtnComponent } from './components/connection-button/connectio
 import { AppRoutingModule } from './router/app-routing.module';
 import { environment } from 'src/environments/environment';
 
-import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store'
+import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { userReducer } from './store/reducers/user.reducer';
 import { tokenReducer } from './store/reducers/token.reducer';
 import { AuthenticationService } from './services/authentication.service';
 import { BeersListComponent } from './components/beers/beers-list/beers-list.component';
-import { BeersCardComponent } from "./components/beers/beers-card/beers-card.component";
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
+import { BeersCardComponent } from './components/beers/beers-card/beers-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
-import { ShopsCardComponent } from "./components/shops/shops-card/shops-card.component";
-import { HttpService } from './services/tools/http.service'
+import { ShopsCardComponent } from './components/shops/shops-card/shops-card.component';
+import { HttpService } from './services/tools/http.service';
 import { UserService } from './services/api/user.service';
 import { BeerService } from './services/api/beer.service';
 import { TradeService } from './services/api/trade.service';
@@ -57,21 +57,21 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ToasterService } from './services/tools/toaster.service';
 import { GeocodingService } from './services/geocoding.service';
-import { GeolocationService } from "./services/geolocation.service";
+import { GeolocationService } from './services/geolocation.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddressListModalComponent } from './components/forms/shop-formular/modal/address-list-modal.component';
 import { BeersPageComponent } from './components/beers/beers-page/beers-page.component';
 import { AppState } from './store/app.state';
 import { BeerSearchService } from './services/api/beerSearch.service';
 import { BeerSearchBarComponent } from './components/forms/beer-search-bar/beer-search-bar.component';
-import { ShopEditDialog } from './components/shop-edit-dialog/shop-edit-dialog';
-import { BeerEditDialog } from './components/beer-edit-dialog/beer-edit-dialog';
+import { ShopEditDialogComponent } from './components/shop-edit-dialog/shop-edit-dialog';
+import { BeerEditDialogComponent } from './components/beer-edit-dialog/beer-edit-dialog';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
 };
 
-let config = new AuthServiceConfig([
+const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
     provider: new GoogleLoginProvider(environment.googleAPIClientId, googleLoginOptions)
@@ -111,8 +111,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     FileUploaderComponent,
     BeersPageComponent,
     BeerSearchBarComponent,
-    ShopEditDialog,
-    BeerEditDialog,
+    ShopEditDialogComponent,
+    BeerEditDialogComponent,
   ],
   imports: [
     SocialLoginModule,

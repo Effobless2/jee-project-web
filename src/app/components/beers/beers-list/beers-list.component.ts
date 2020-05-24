@@ -2,12 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Beer } from 'src/app/models/Beer';
 
 @Component({
-  selector: 'beers-list',
+  selector: 'app-beers-list',
   templateUrl: './beers-list.component.html',
   styleUrls: ['./beers-list.component.css']
 })
 export class BeersListComponent implements OnInit {
-  @Input("beers") beers: Beer[];
+  @Input() beers: Beer[];
 
   ngOnInit(): void {
   }

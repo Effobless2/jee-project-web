@@ -1,14 +1,14 @@
-import { Component, ViewChild, Input } from "@angular/core";
+import { Component, ViewChild, Input } from '@angular/core';
 import { AgmMap } from '@agm/core';
 
-export interface Marker{
+export interface Marker {
     lat: number;
     lng: number;
     label: string;
     data?: any;
 }
 
-export interface MapOnClickEvent{
+export interface MapOnClickEvent {
     coords: {
         lat: number,
         lng: number
@@ -17,22 +17,21 @@ export interface MapOnClickEvent{
 }
 
 @Component({
-    selector: 'map',
+    selector: 'app-map',
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.css']
 })
-export class MapComponent{
-    @Input() onClickedMapEvent: (event :MapOnClickEvent) => any = () => {};
-    @Input() onClickedMarkerEvent: (marker: Marker, index: number) => any = () => {};
-    @Input() latitude: number = 0;
-    @Input() longitude: number = 0;
-
-
-    @ViewChild('map') map: AgmMap;
+export class MapComponent {
     public markers: Marker[] = [];
+    @ViewChild('map') map: AgmMap;
+    @Input() latitude = 0;
+    @Input() longitude = 0;
+    @Input() onClickedMapEvent: (event: MapOnClickEvent) => any = () => {};
+    @Input() onClickedMarkerEvent: (marker: Marker, index: number) => any = () => {};
 
 
-    public get coordinates() : {longitude: number, latitude: number}{
+
+    public get coordinates(): {longitude: number, latitude: number} {
         return {
             longitude: this.map.longitude,
             latitude: this.map.latitude
@@ -43,16 +42,17 @@ export class MapComponent{
         this.markers.push(marker);
     }
 
-    public deleteMarker(index: number){
-        if(index < this.markers.length)
+    public deleteMarker(index: number) {
+        if (index < this.markers.length) {
             this.markers.splice(index, 1);
+        }
     }
 
     public clearMarkers() {
         this.markers = [];
     }
 
-    public setCenter(location: {lat: number, lng: number}){
+    public setCenter(location: {lat: number, lng: number}) {
         this.latitude = Number(location.lat);
         this.longitude = Number(location.lng);
     }

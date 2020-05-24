@@ -1,10 +1,10 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'page-home',
+    selector: 'app-page-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent{
-    title: String = "Beerer";
+export class HomeComponent {
+    title = 'Beerer';
 }
