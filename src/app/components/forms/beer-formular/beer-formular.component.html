@@ -24,6 +24,6 @@
 
     <file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></file-uploader>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>Add</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]='unsubmitable'>{{ submitButtonLabel }}</button>
   </form>
 </mat-card>

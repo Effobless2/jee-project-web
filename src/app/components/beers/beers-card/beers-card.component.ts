@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { BeerEditDialog } from '../../beer-edit-dialog/beer-edit-dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-beers-card',
@@ -8,5 +10,11 @@ import { Component, Input } from '@angular/core';
 export class BeersCardComponent {
 
   @Input() beer:any
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
+
+  onEdit(){
+    this.dialog.open(BeerEditDialog, {
+      data: this.beer
+    });
+  }
 }
