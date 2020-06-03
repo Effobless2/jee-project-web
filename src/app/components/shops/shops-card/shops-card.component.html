@@ -8,13 +8,17 @@
   </mat-card-header>
   <mat-card-content>
     <p>
-      {{shop.description}}
+      {{description}}
     </p>
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-button>BEER MENU</button>
-    <button mat-button>ADD TO FAVORITES</button>
-    <button mat-button>SHARE</button>
-    <button mat-button (click)='onEdit()'>EDIT</button>
+    <div class="row">
+      <button mat-button>BEER MENU</button>
+      <button mat-button>ADD TO FAVORITES</button>
+      <button mat-button>SHARE</button>
+    </div>
+    <div class="row" id="editDiv">
+      <button mat-button (click)='onEdit()'>EDIT</button>
+    </div>
   </mat-card-actions>
 </mat-card>

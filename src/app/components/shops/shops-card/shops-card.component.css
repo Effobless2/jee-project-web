@@ -22,8 +22,14 @@ mat-card-content {
   margin: 5px;
 }
 
+#editDiv{
+ padding-right: 8px;
+}
+
 mat-card-actions {
   position: absolute;
   bottom: 20px;
   right: 10px;
+  display: flex;
+  flex-direction: column-reverse;
 }

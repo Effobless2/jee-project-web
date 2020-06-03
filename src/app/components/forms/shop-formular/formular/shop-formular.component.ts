@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GeocodingService } from 'src/app/services/geocoding.service';
 import { GeocoderResult } from '@agm/core';
 import { GeolocationService } from 'src/app/services/geolocation.service';
+import { tradeTypes } from 'src/app/services/tools/trade.types';
 
 interface ShopFormularFields {
     id?: number;
@@ -34,6 +35,7 @@ export class ShopFormularComponent implements OnInit {
     @Input() trade: Trade = null;
 
     formGroup: FormGroup;
+    types: string[] = tradeTypes;
     @ViewChild('map') map: MapComponent;
     @ViewChild('fileUploader') fileUploader: FileUploaderComponent;
 
