@@ -19,10 +19,10 @@ export class ShopsCardComponent {
         });
     }
 
-    get description(): string{
+    get description(): string {
         const max = 150;
-        if(this.shop.description.length > max){
-            return this.shop.description.slice(0, max) + "...";
+        if (this.shop.description.length > max) {
+            return this.shop.description.slice(0, max) + '...';
         }
         return this.shop.description;
     }
