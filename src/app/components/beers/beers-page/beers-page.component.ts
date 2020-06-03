@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['beers-page.component.css']
 })
 export class BeersPageComponent {
+
   beers: Beer[];
 
   constructor(

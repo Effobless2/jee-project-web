@@ -21,3 +21,11 @@ div:not(#checkboxes){
 form{
     text-align: center;
 }
+
+.example-card {
+  width: fit-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1%;
+}

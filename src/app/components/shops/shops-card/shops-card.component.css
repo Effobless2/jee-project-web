@@ -1,15 +1,16 @@
 .example-card {
-  width: 70%;
+  width: 400px;
+  height: 200px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1%;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 .example-header-image {
   background-size: cover;
   height: 80px;
   width: 80px;
+  position: relative;
 }
 
 .header-text {
@@ -19,4 +20,10 @@
 
 mat-card-content {
   margin: 5px;
+}
+
+mat-card-actions {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
 }

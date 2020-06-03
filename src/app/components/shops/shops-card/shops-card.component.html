@@ -1,6 +1,6 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <img mat-card-avatar class="example-header-image" src="{{shop.profilePict}}"/>
+    <img mat-card-avatar class="example-header-image" alt="profile picture of {{shop.name}}" src="{{shop.profilePict}}"/>
     <div class="header-text">
       <mat-card-title>{{shop.name}}</mat-card-title>
       <mat-card-subtitle>{{shop.type}} - {{shop.address}}</mat-card-subtitle>
@@ -12,6 +12,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions align="end">
+    <button mat-button>BEER MENU</button>
     <button mat-button>ADD TO FAVORITES</button>
     <button mat-button>SHARE</button>
     <button mat-button (click)='onEdit()'>EDIT</button>
