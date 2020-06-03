@@ -18,4 +18,12 @@ export class ShopsCardComponent {
             data: this.shop
         });
     }
+
+    get description(): string {
+        const max = 150;
+        if (this.shop.description.length > max) {
+            return this.shop.description.slice(0, max) + '...';
+        }
+        return this.shop.description;
+    }
 }

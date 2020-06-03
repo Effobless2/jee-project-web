@@ -1,0 +1,33 @@
+<mat-card class="example-card">
+  <form class="searchForm" [formGroup]="formGroup" (ngSubmit)=onSearch() class="row">
+    <div class="fields">
+      <mat-form-field class="example-full-width">
+        <input type="text" matInput placeholder="Search a shop" formControlName="name">
+      </mat-form-field>
+
+      <div class="types">
+        <mat-label for="checkboxes">Types :</mat-label>
+        <div id="checkboxes" formArrayName="types" class="col-md-3">
+          <mat-checkbox *ngFor="let type of shopTypesForm.controls; let i = index"
+                        [formControlName]="i">
+            {{ tradeTypes[i] }}
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <div class="location">
+        <mat-form-field class="example-full-width">
+          <input type="string" matInput placeholder="Address (City, Zipcode...)" formControlName="address">
+        </mat-form-field>
+        <mat-checkbox formControlName="nearMe">Autour de moi</mat-checkbox>
+      </div>
+    </div>
+
+    <button matSuffix mat-button type="submit" [disabled]="disabled">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button matSuffix mat-button type='button' (click)="_rollback()">
+      <mat-icon>cached</mat-icon>
+    </button>
+  </form>
+</mat-card>

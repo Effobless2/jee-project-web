@@ -1,4 +1,4 @@
-<div>
+<mat-card class="example-card">
     <form class="searchForm" [formGroup]="formGroup" (ngSubmit)=onSearch() class="row">
         <mat-form-field class="example-full-width">
             <input type="text" matInput placeholder="Search a beer" formControlName="name">
@@ -13,7 +13,7 @@
         </div>
 
         <mat-form-field class="example-full-width">
-            <input type="number" matInput placeholder="Search a beer" formControlName="alcoholLevel">
+            <input type="number" step="0.1" matInput placeholder="Alcohol level" formControlName="alcoholLevel">
         </mat-form-field>
 
         <button matSuffix mat-button type="submit" [disabled]="disabled">
@@ -23,4 +23,4 @@
             <mat-icon>cached</mat-icon>
         </button>
     </form>
-</div>
+</mat-card>

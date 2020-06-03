@@ -2,7 +2,7 @@
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
     <mat-form-field>
       <mat-label for="name">Name</mat-label>
-      <input matInput id="name" type="text" formControlName="name">
+      <input matInput type="text" formControlName="name">
     </mat-form-field>
 
     <mat-form-field>
@@ -11,15 +11,13 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-select placeholder="Alcohol Level" formControlName="alcoholLevel">
-        <mat-option *ngFor="let alcoholLevel of alcoholLevels" [value]="alcoholLevel">{{alcoholLevel}}</mat-option>
-      </mat-select>
+    <mat-form-field class="example-full-width">
+      <input type="number" step="0.1" matInput placeholder="Alcohol level" formControlName="alcoholLevel">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label for="description">Description</mat-label>
-      <textarea id="description" matInput formControlName="description" rows="3"></textarea>
+      <textarea matInput formControlName="description" rows="3"></textarea>
     </mat-form-field>
 
     <app-file-uploader #fileUploader [subscriber]="onFileSelected.bind(this)"></app-file-uploader>
