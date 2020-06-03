@@ -1,21 +1,15 @@
-mat-form-field, mat-label, div{
-  padding-left: 15pt;
-}
-
 mat-checkbox {
-  min-width: 100pt;
   display: flex;
 }
 
-#checkboxes {
-  display: inline-grid;
-  position: relative;
+.types {
+  text-align: left;
+  padding: 15px;
 }
 
-div:not(#checkboxes){
-  width: 100%;
-  background-color: white;
-  margin-bottom: 10pt
+.fields {
+  display: flex;
+  flex-direction: row;
 }
 
 form{
@@ -24,8 +18,13 @@ form{
 
 .example-card {
   width: fit-content;
-  display: block;
+  display: flex;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1%;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
 }

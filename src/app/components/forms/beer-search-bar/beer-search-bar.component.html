@@ -13,7 +13,7 @@
         </div>
 
         <mat-form-field class="example-full-width">
-            <input type="number" matInput placeholder="Alcohol level" formControlName="alcoholLevel">
+            <input type="number" step="0.1" matInput placeholder="Alcohol level" formControlName="alcoholLevel">
         </mat-form-field>
 
         <button matSuffix mat-button type="submit" [disabled]="disabled">
