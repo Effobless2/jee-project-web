@@ -20,7 +20,7 @@ interface ShopFormularFields {
     name: string;
     description: string;
     longitude: number;
-    lattitude: number;
+    latitude: number;
     type: string;
     address: string;
     profilePict: string|File;
@@ -53,7 +53,7 @@ export class ShopFormularComponent implements OnInit {
             name: null,
             description: null,
             longitude: null,
-            lattitude: null,
+            latitude: null,
             type: null,
             address: null,
             profilePict: null,
@@ -65,11 +65,11 @@ export class ShopFormularComponent implements OnInit {
             this.formGroup = this.formBuilder.group(this.trade as ShopFormularFields);
             setTimeout(_ => {
                 this.map.addMarker({
-                    lat: this.trade.lattitude,
+                    lat: this.trade.latitude,
                     lng: this.trade.longitude,
                     label: 'ICI'
                 } as Marker);
-                this._updateMapCenter({lat: this.trade.lattitude, lng: this.trade.longitude});
+                this._updateMapCenter({lat: this.trade.latitude, lng: this.trade.longitude});
                 this.fileUploader.imagePict = this.trade.profilePict as string;
             }, 0);
         } else {
