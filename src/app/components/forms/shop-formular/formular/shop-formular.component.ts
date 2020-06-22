@@ -81,22 +81,33 @@ export class ShopFormularComponent implements OnInit {
         this._updateMapCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude });
     }
 
-    get unsubmitable(): boolean {
-        return Object.values(this.formGroup.value)
-            .some((x: string|number|File) => {
-                return x === undefined ||
-                    x === null || (
-                        typeof(x) === 'string' &&
-                        (x as string).length === 0
-                    );
-            }
-        ) || (
-            this.trade !== null &&
-            Object.keys(this.formGroup.value)
-                .every((key: string) =>
-                    this.formGroup.value[key] === this.trade[key]
-                )
+    private _formGroupFieldsAreNull(): boolean {
+        return  !this.formGroup.value.address ||
+                !this.formGroup.value.name ||
+                !this.formGroup.value.description ||
+                !this.formGroup.value.profilePict ||
+                !this.formGroup.value.type ||
+                this.formGroup.value.latitude === undefined ||
+                this.formGroup.value.latitude === null ||
+                this.formGroup.value.longitude === undefined ||
+                this.formGroup.value.longitude === null;
+    }
+
+    private _noChangesWithTrade(): boolean {
+        return this.trade && (
+            this.formGroup.value.address === this.trade.address &&
+            this.formGroup.value.name === this.trade.name &&
+            this.formGroup.value.description === this.trade.description &&
+            this.formGroup.value.profilePict === this.trade.profilePict &&
+            this.formGroup.value.type === this.trade.type &&
+            this.formGroup.value.latitude === this.trade.latitude &&
+            this.formGroup.value.longitude === this.trade.longitude
         );
+    }
+
+    get unsubmitable(): boolean {
+        return  this._formGroupFieldsAreNull() ||
+                this._noChangesWithTrade();
     }
 
     get submitButtonLabel(): string {
@@ -134,9 +145,9 @@ export class ShopFormularComponent implements OnInit {
         });
     }
 
-    private _updateCoordsForm(lattitude: number, longitude: number) {
+    private _updateCoordsForm(latitude: number, longitude: number) {
         this.formGroup.patchValue({
-            lattitude,
+            latitude,
             longitude
         });
     }

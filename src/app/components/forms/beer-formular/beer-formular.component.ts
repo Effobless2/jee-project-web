@@ -65,20 +65,28 @@ export class BeerFormularComponent implements OnInit {
         return this.beer === null ? 'Create' : 'Update';
     }
 
+    private _formGroupFieldsAreNull(): boolean {
+        return  !this.formGroup.value.name ||
+                !this.formGroup.value.description ||
+                !this.formGroup.value.profilePict ||
+                !this.formGroup.value.type ||
+                this.formGroup.value.alcoholLevel === undefined ||
+                this.formGroup.value.alcoholLevel === null;
+    }
+
+    private _noChangesWithBeer(): boolean {
+        return this.beer && (
+            this.formGroup.value.name === this.beer.name &&
+            this.formGroup.value.description === this.beer.description &&
+            this.formGroup.value.profilePict === this.beer.profilePict &&
+            this.formGroup.value.type === this.beer.type &&
+            this.formGroup.value.alcoholLevel === this.beer.alcoholLevel
+        );
+    }
+
     get unsubmitable(): boolean {
-        return Object.values(this.formGroup.value)
-            .some((x: string | number | File) =>
-                x === undefined ||
-                x === null || (
-                    typeof (x) === 'string' &&
-                    (x as string).length === 0
-                )
-            ) || (
-                this.beer != null &&
-                Object.keys(this.formGroup.value).every((key: string) =>
-                    this.formGroup.value[key] === this.beer[key]
-                )
-            );
+        return  this._formGroupFieldsAreNull() ||
+                this._noChangesWithBeer();
     }
 
     onSubmit(values: BeerFormularFields) {
