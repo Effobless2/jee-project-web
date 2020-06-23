@@ -3,7 +3,7 @@ export interface Trade {
     name: string;
     type: string;
     longitude: number;
-    lattitude: number;
+    latitude: number;
     address: string;
     profilePict?: string|File;
     description: string;
