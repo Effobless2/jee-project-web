@@ -69,6 +69,7 @@ import { BeerEditDialogComponent } from './components/beer-edit-dialog/beer-edit
 import { ShopSearchBarComponent } from './components/forms/shop-search-bar/shop-search-bar.component';
 import { ShopsPageComponent } from './components/shops/shops-page/shops-page.component';
 import {TradeSearchService} from './services/api/tradeSearch.service';
+import { MyShopsPageComponent } from './components/my-shops/my-shops-page/my-shops-page.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -118,6 +119,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     BeerEditDialogComponent,
     ShopSearchBarComponent,
     ShopsPageComponent,
+    MyShopsPageComponent,
   ],
   imports: [
     SocialLoginModule,

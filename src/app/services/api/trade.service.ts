@@ -27,6 +27,15 @@ export class TradeService {
         });
     }
 
+    getMine(subscriber: (shops: Trade[]) => void,
+            error?: (error: HttpErrorResponse) => void): Subscription {
+        return this.httpService.get(`${this.controllerUrl}/mine`, this.token)
+        .subscribe({
+            next: subscriber,
+            error
+        });
+    }
+
     get(id: number,
         subscriber: (shop: Trade) => void,
         error?: (error: HttpErrorResponse) => void): Subscription {

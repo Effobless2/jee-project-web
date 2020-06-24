@@ -7,6 +7,7 @@ import { ROUTES } from './routes';
 import { BeerFormularComponent } from '../components/forms/beer-formular/beer-formular.component';
 import { ShopFormularComponent } from '../components/forms/shop-formular/formular/shop-formular.component';
 import { BeersPageComponent } from '../components/beers/beers-page/beers-page.component';
+import { MyShopsPageComponent } from '../components/my-shops/my-shops-page/my-shops-page.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: ROUTES.shops.path,    component: ShopsPageComponent    },
   { path: ROUTES.beerForm.path, component: BeerFormularComponent },
   { path: ROUTES.shopForm.path, component: ShopFormularComponent },
+  { path: ROUTES.myShops.path,  component: MyShopsPageComponent  },
 ];
 
 @NgModule({
