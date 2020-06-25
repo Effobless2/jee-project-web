@@ -73,6 +73,7 @@ import { MyShopsPageComponent } from './components/my-shops/my-shops-page/my-sho
 import { MyShopsCardComponent } from './components/my-shops/my-shops-item/my-shops-card.component';
 import { MyShopsListComponent } from './components/my-shops/my-shops-list/my-shops-list.component';
 import { BeerStockModalComponent } from './components/my-shops/beer-stock-modal/beer-stock-modal.component';
+import { BeerSellersLocationComponent } from './components/beers/beer-sellers-location/beer-sellers-location.component';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -126,6 +127,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     MyShopsCardComponent,
     MyShopsListComponent,
     BeerStockModalComponent,
+    BeerSellersLocationComponent,
   ],
   imports: [
     SocialLoginModule,
