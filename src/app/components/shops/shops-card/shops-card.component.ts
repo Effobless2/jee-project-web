@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Trade } from 'src/app/models/Trade';
-import { MatDialog } from '@angular/material/dialog';
-import { ShopEditDialogComponent } from '../../shop-edit-dialog/shop-edit-dialog';
 
 @Component({
     selector: 'app-shops-card',
@@ -11,13 +9,8 @@ import { ShopEditDialogComponent } from '../../shop-edit-dialog/shop-edit-dialog
 export class ShopsCardComponent {
     @Input() shop: Trade;
 
-    constructor(public dialog: MatDialog) { }
+    constructor() { }
 
-    onEdit() {
-        this.dialog.open(ShopEditDialogComponent, {
-            data: this.shop
-        });
-    }
 
     get description(): string {
         const max = 150;

@@ -1,0 +1,35 @@
+.example-card {
+  width: 400px;
+  height: 200px;
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.example-header-image {
+  background-size: cover;
+  height: 80px;
+  width: 80px;
+  position: relative;
+}
+
+.header-text {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+mat-card-content {
+  margin: 5px;
+}
+
+#editDiv{
+ padding-right: 8px;
+}
+
+mat-card-actions {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+}

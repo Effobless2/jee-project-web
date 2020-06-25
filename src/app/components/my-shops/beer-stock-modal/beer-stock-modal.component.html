@@ -1,0 +1,9 @@
+<h2>Stocks</h2>
+<ul>
+    <li *ngFor='let b of allBeers'>
+        <div class="row">
+            <button mat-button (click)='addOrRemove(b)'>{{ btnText(b) }}</button>
+            <h4> {{ b.name }}</h4>
+        </div>
+    </li>
+</ul>

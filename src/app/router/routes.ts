@@ -10,4 +10,5 @@ export const ROUTES = {
     about:    {path: 'about'    , title: 'About Us'},
     beerForm: {path: 'beer-form', title: 'New Beer'},
     shopForm: {path: 'shop-form', title: 'New Shop'},
+    myShops : {path: 'my-shops' , title: 'My Shops'}
 };
