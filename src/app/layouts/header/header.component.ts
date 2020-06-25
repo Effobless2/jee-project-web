@@ -17,7 +17,7 @@ export class HeaderComponent {
 
     constructor(
         private router: Router,
-        private location: Location, 
+        private location: Location,
         private store: Store<AppState>) {
         this.router.events.subscribe((_) => {
             Object.values(ROUTES).map((route: URLDatas) => {

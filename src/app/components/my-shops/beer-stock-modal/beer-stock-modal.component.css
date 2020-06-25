@@ -1,0 +1,17 @@
+.example-card {
+    width: 800px;
+    height: 500px;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.beer-from {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.beer-from > button {
+    margin: 10px;
+}

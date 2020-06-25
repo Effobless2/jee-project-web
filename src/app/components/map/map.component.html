@@ -3,7 +3,7 @@
         *ngFor="let marker of markers; let i = index" 
         [latitude]="marker.lat" 
         [longitude]="marker.lng" 
-        [label]="{color: 'white', text: marker.label}"
+        [label]="{color: marker.labelColor ? marker.labelColor : 'white', text: marker.label}"
         (markerClick)="onClickedMarkerEvent(marker, i)">
     </agm-marker>
 </agm-map>

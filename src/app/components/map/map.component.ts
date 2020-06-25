@@ -6,6 +6,7 @@ export interface Marker {
     lng: number;
     label: string;
     data?: any;
+    labelColor?: string;
 }
 
 export interface MapOnClickEvent {

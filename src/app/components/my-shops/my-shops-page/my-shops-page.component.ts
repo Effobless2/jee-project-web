@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { User } from 'src/app/models/User';
@@ -10,8 +10,8 @@ import { Trade } from 'src/app/models/Trade';
     templateUrl: 'my-shops-page.component.html',
     styleUrls: ['my-shops-page.component.css']
 })
-export class MyShopsPageComponent{
-    isConnected: boolean = false;
+export class MyShopsPageComponent {
+    isConnected = false;
     trades: Trade[] = [];
     constructor(
         private store: Store<AppState>,
@@ -23,10 +23,9 @@ export class MyShopsPageComponent{
     }
 
     private getMyShops() {
-        if(this.isConnected) {
+        if (this.isConnected) {
             this.tradesService.getMine(this.setTradeList.bind(this));
-        }
-        else {
+        } else {
             this.trades = [];
         }
     }

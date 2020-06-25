@@ -12,8 +12,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>ADD TO FAVORITES</button>
-    <button mat-button>SHARE</button>
+    <button mat-button (click)='showLocation()' [disabled]='!beer.sellers || beer.sellers.length === 0'>WHERE ?</button>
     <button mat-button (click)="onEdit()">EDIT</button>
   </mat-card-actions>
 </mat-card>
