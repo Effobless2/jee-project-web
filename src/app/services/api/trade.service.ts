@@ -6,6 +6,7 @@ import { Trade } from 'src/app/models/Trade';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Beer } from 'src/app/models/Beer';
 
 @Injectable()
 export class TradeService {
@@ -90,6 +91,22 @@ export class TradeService {
         return this.httpService.delete(`${this.controllerUrl}/${id}`, this.token)
         .subscribe({
             next: subscriber,
+            error
+        });
+    }
+
+    addBeerToItems(trade: Trade, beer: Beer, subscriber: (beer: Beer) => void, error?: (error: HttpErrorResponse) => void): Subscription {
+        return this.httpService.patch(`${this.controllerUrl}/${trade.id}/add/${beer.id}`, null, this.token)
+        .subscribe({
+            next: () => subscriber(beer),
+            error
+        });
+    }
+
+    removeBeertoItems(trade: Trade, beer: Beer, subscriber: (beer: Beer) => void, error?: (error: HttpErrorResponse) => void): Subscription {
+        return this.httpService.patch(`${this.controllerUrl}/${trade.id}/remove/${beer.id}`, null, this.token)
+        .subscribe({
+            next: () => subscriber(beer),
             error
         });
     }

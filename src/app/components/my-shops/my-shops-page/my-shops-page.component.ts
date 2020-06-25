@@ -32,7 +32,6 @@ export class MyShopsPageComponent{
     }
 
     private setTradeList(trades: Trade[]) {
-        console.log(trades);
         this.trades = [...trades];
     }
 }

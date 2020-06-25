@@ -1,3 +1,5 @@
+import { Beer } from './Beer';
+
 export interface Trade {
     id?: number;
     name: string;
@@ -7,4 +9,5 @@ export interface Trade {
     address: string;
     profilePict?: string|File;
     description: string;
+    items?: Beer[];
 }
