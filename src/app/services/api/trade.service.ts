@@ -103,7 +103,11 @@ export class TradeService {
         });
     }
 
-    removeBeertoItems(trade: Trade, beer: Beer, subscriber: (beer: Beer) => void, error?: (error: HttpErrorResponse) => void): Subscription {
+    removeBeertoItems(
+        trade: Trade,
+        beer: Beer,
+        subscriber: (beer: Beer) => void,
+        error?: (error: HttpErrorResponse) => void): Subscription {
         return this.httpService.patch(`${this.controllerUrl}/${trade.id}/remove/${beer.id}`, null, this.token)
         .subscribe({
             next: () => subscriber(beer),

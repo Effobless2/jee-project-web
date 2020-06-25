@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from "@angular/core";
+import { Component, Input, Inject } from '@angular/core';
 import { Trade } from 'src/app/models/Trade';
 import { Beer } from 'src/app/models/Beer';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -24,13 +24,14 @@ export class BeerStockModalComponent {
     }
 
     btnText(beer: Beer): string {
-        if (this.isOnItems(beer))
+        if (this.isOnItems(beer)) {
             return 'Remove';
+        }
         return 'Add';
     }
 
     private isOnItems(beer: Beer): boolean {
-        return this.data.items.some(b => b.id === beer.id)
+        return this.data.items.some(b => b.id === beer.id);
     }
 
     addOrRemove(beer: Beer) {

@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild, OnInit, AfterContentInit, AfterViewInit } from "@angular/core";
+import { Component, Inject, ViewChild, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { Beer } from 'src/app/models/Beer';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GeolocationService } from 'src/app/services/geolocation.service';
@@ -9,7 +9,7 @@ import { MapComponent } from '../../map/map.component';
     templateUrl: 'beer-sellers-location.component.html',
     styleUrls: ['beer-sellers-location.component.css']
 })
-export class BeerSellersLocationComponent implements AfterViewInit{
+export class BeerSellersLocationComponent implements AfterViewInit {
     @ViewChild('map') map: MapComponent;
     latitude = 0;
     longitude = 0;
@@ -20,7 +20,7 @@ export class BeerSellersLocationComponent implements AfterViewInit{
 
     ngAfterViewInit(): void {
         this.locationService.getCurrentPosition(this.setUserLocation.bind(this));
-        if(this.data && this.data.sellers)
+        if (this.data && this.data.sellers) {
             this.data.sellers.forEach(trade => {
                 this.map.addMarker({
                     label: trade.name,
@@ -29,6 +29,7 @@ export class BeerSellersLocationComponent implements AfterViewInit{
                     labelColor: 'black'
                 });
             });
+        }
     }
 
     setUserLocation(position: Position) {
@@ -40,6 +41,6 @@ export class BeerSellersLocationComponent implements AfterViewInit{
             label: 'You are Here',
             lat: position.coords.latitude,
             lng: position.coords.longitude
-        })
+        });
     }
 }
