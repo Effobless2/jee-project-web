@@ -74,6 +74,8 @@ import { MyShopsCardComponent } from './components/my-shops/my-shops-item/my-sho
 import { MyShopsListComponent } from './components/my-shops/my-shops-list/my-shops-list.component';
 import { BeerStockModalComponent } from './components/my-shops/beer-stock-modal/beer-stock-modal.component';
 import { BeerSellersLocationComponent } from './components/beers/beer-sellers-location/beer-sellers-location.component';
+import { SearchingHistoryPageComponent } from './components/searching-history/searching-history-page/searching-history-page.component';
+import { HistoryService } from './services/api/history.service';
 
 const googleLoginOptions: LoginOpt = {
   scope: 'profile email'
@@ -128,6 +130,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     MyShopsListComponent,
     BeerStockModalComponent,
     BeerSellersLocationComponent,
+    SearchingHistoryPageComponent,
   ],
   imports: [
     SocialLoginModule,
@@ -173,7 +176,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     GeocodingService,
     GeolocationService,
     BeerSearchService,
-    TradeSearchService
+    TradeSearchService,
+    HistoryService,
   ],
   bootstrap: [AppComponent]
 })
