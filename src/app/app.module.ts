@@ -7,21 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule, WavesModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-// import { MatButtonModule } from '@angular/material/button'
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
-// import { MatSelectModule } from '@angular/material/select'
-// import { MatDatepickerModule } from '@angular/material/datepicker'
-// import { MatNativeDateModule } from '@angular/material/core'
-// import { MatCardModule } from '@angular/material/card'
-// import { MatToolbarModule } from '@angular/material/toolbar'
-// import { MatFormFieldModule } from '@angular/material/form-field'
-// import { MatSnackBarModule } from '@angular/material/snack-bar'
-// import { MatDialogModule } from '@angular/material/dialog'
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrModule } from 'ngx-toastr';
-
 import { SocialLoginModule, AuthServiceConfig, LoginOpt } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -29,10 +19,8 @@ import { BodyComponent } from './layouts/body/body.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { ConnectionBtnComponent } from './components/connection-button/connection-button.component';
-
 import { AppRoutingModule } from './router/app-routing.module';
 import { environment } from 'src/environments/environment';
-
 import { StoreModule, ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { userReducer } from './store/reducers/user.reducer';
@@ -53,7 +41,7 @@ import { TradeService } from './services/api/trade.service';
 import { ShopFormularComponent } from './components/forms/shop-formular/formular/shop-formular.component';
 import { MapComponent } from './components/map/map.component';
 import { BeerFormularComponent } from './components/forms/beer-formular/beer-formular.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { ToasterService } from './services/tools/toaster.service';
 import { GeocodingService } from './services/geocoding.service';
@@ -68,7 +56,7 @@ import { ShopEditDialogComponent } from './components/shop-edit-dialog/shop-edit
 import { BeerEditDialogComponent } from './components/beer-edit-dialog/beer-edit-dialog';
 import { ShopSearchBarComponent } from './components/forms/shop-search-bar/shop-search-bar.component';
 import { ShopsPageComponent } from './components/shops/shops-page/shops-page.component';
-import {TradeSearchService} from './services/api/tradeSearch.service';
+import { TradeSearchService } from './services/api/tradeSearch.service';
 import { MyShopsPageComponent } from './components/my-shops/my-shops-page/my-shops-page.component';
 import { MyShopsCardComponent } from './components/my-shops/my-shops-item/my-shops-card.component';
 import { MyShopsListComponent } from './components/my-shops/my-shops-list/my-shops-list.component';
